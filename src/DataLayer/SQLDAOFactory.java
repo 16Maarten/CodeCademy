@@ -1,11 +1,11 @@
-
 package DataLayer;
 
 import person.Registration;
 import person.Student;
 import products.Course;
 
-public class SQLDAOFactory implements DAOFactory{
+public class SQLDAOFactory implements DAOFactory {
+
     private String connectionUrl;
 
     public SQLDAOFactory(String connectionUrl) {
@@ -36,10 +36,10 @@ public class SQLDAOFactory implements DAOFactory{
     public DAOModule createDAOModule() {
         return new SQLDAOModule(this.connectionUrl);
     }
-    
+
     @Override
     public boolean removeDAOStudent(Student student) {
-         return new SQLDAOStudent(this.connectionUrl).deleteStudent(student);
+        return new SQLDAOStudent(this.connectionUrl).deleteStudent(student);
     }
 
     @Override
@@ -56,5 +56,15 @@ public class SQLDAOFactory implements DAOFactory{
     public boolean addDAOStudent(Student student) {
         return new SQLDAOStudent(this.connectionUrl).addStudent(student);
     }
-    
+
+    @Override
+    public boolean addDAOCourse(Course course) {
+        return new SQLDAOCourse(this.connectionUrl).addCourse(course);
+    }
+
+    @Override
+    public boolean addDAORegistration(Registration registration) {
+       return new SQLDAORegistration(this.connectionUrl).addRegistration(registration);
+    }
+
 }

@@ -14,14 +14,13 @@ import java.util.Date;
 import java.util.List;
 import person.Registration;
 
+public class SQLDAORegistration implements DAORegistration {
 
-public class SQLDAORegistration implements DAORegistration{
     private String connectionUrl;
 
     public SQLDAORegistration(String connectionUrl) {
         this.connectionUrl = connectionUrl;
     }
-    
 
     @Override
     public List<Registration> findRegistration() {
@@ -47,30 +46,28 @@ public class SQLDAORegistration implements DAORegistration{
                 Date registrationDate = rs.getDate("RegistrationDate");
                 String email = rs.getString("Email");
                 String cursusName = rs.getString("CursusName");
-                registrations.add(new Registration(registrationDate,email,cursusName));
-                
-            }
-        }
+                registrations.add(new Registration(registrationDate, email, cursusName));
 
-        // Handle any errors that may have occurred.
+            }
+        } // Handle any errors that may have occurred.
         catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (rs != null)
                 try {
-                    rs.close();
-                } catch (Exception e) {
-                }
+                rs.close();
+            } catch (Exception e) {
+            }
             if (stmt != null)
                 try {
-                    stmt.close();
-                } catch (Exception e) {
-                }
+                stmt.close();
+            } catch (Exception e) {
+            }
             if (con != null)
                 try {
-                    con.close();
-                } catch (Exception e) {
-                }
+                con.close();
+            } catch (Exception e) {
+            }
         }
         return registrations;
     }
@@ -92,7 +89,7 @@ public class SQLDAORegistration implements DAORegistration{
 
             stmt = con.createStatement();
             // Voer de query uit op de database.
-            stmt.execute("Delete FROM Registration WHERE CursusName='" + registration.getCursusName() + "' AND Email='"+registration.getEmail()+"' AND RegistrationDate='"+registration.getRegistrationDate()+"'");
+            stmt.execute("Delete FROM Registration WHERE CursusName='" + registration.getCursusName() + "' AND Email='" + registration.getEmail() + "' AND RegistrationDate='" + registration.getRegistrationDate() + "'");
             answer = true;
         } // Handle any errors that may have occurred.
         catch (Exception e) {
@@ -112,5 +109,44 @@ public class SQLDAORegistration implements DAORegistration{
         }
         return answer;
     }
-    
+
+    @Override
+    public boolean addRegistration(Registration registration) {
+        boolean answer;
+        // Connection beheert informatie over de connectie met de database.
+        Connection con = null;
+        // Statement zorgt dat we een SQL query kunnen uitvoeren.
+        Statement stmt = null;
+        // ResultSet is de tabel die we van de database terugkrijgen.
+        // We kunnen door de rows heen stappen en iedere kolom lezen.
+        try {
+            // 'Importeer' de driver die je gedownload hebt.
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // Maak de verbinding met de database.
+            con = DriverManager.getConnection(connectionUrl);
+
+            stmt = con.createStatement();
+            // Voer de query uit op de database.
+
+            stmt.execute("INSERT INTO Registration VALUES('" + registration.getRegistrationDate() + "','" + registration.getEmail() + "','" + registration.getCursusName() +"')");
+            answer = true;
+        } // Handle any errors that may have occurred.
+        catch (Exception e) {
+            answer = false;
+            e.printStackTrace();
+        } finally {
+            if (stmt != null)
+                try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            if (con != null)
+                try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return answer;
+    }
+
 }
