@@ -1,12 +1,14 @@
 package Presentation;
 
+import Presentation.CourseUI.CourseUI;
+import Presentation.OverviewsUI.OverviewsUI;
+import Presentation.RegistrationUI.RegistrationUI;
 import Presentation.StudentUI.StudentUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -20,19 +22,26 @@ public class HomeUI extends Application{
         StudentUI studentUI = new StudentUI();
         
         Button registration = new Button("Registration");
+        RegistrationUI registrationUI = new RegistrationUI();
+
         Button course = new Button("Course");
+        CourseUI courseUI = new CourseUI();
+
         Button overviews = new Button("Overviews");
+        OverviewsUI overviewsUI = new OverviewsUI();
 
         
-
-        // BorderPane layout = new BorderPane();
+        BorderPane layout = new BorderPane();
         VBox box = new VBox();
 
-        Scene scene = new Scene(box,200,200);
+        Scene scene = new Scene(layout);
         box.getChildren().addAll(label, student, registration, course, overviews);
         box.setSpacing(5);
 
-        // student.setOnAction((event) -> box.setCenter(studentUI.getClass()));
+        student.setOnAction((event) -> layout.setCenter(studentUI.getView()));
+        registration.setOnAction((event) -> layout.setCenter(registrationUI.getView()));
+        course.setOnAction((event) -> layout.setCenter(courseUI.getView()));
+        overviews.setOnAction((event) -> layout.setCenter(overviewsUI.getView()));
 
         windows.setTitle("Codecademy");
 

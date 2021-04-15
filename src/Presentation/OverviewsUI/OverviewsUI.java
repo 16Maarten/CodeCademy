@@ -1,36 +1,31 @@
-package Presentation.StudentUI;
+package Presentation.OverviewsUI;
 
-import javafx.application.Application;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class StudentUI{
+public class OverviewsUI {
     
     public Parent getView(){
         GridPane layout = new GridPane();
         
         Label label = new Label("Choose one of the options for the student class");
-        Button create = new Button("Create");
-        Button read = new Button("Read");
-        Button update = new Button("Update");
-        Button delete = new Button("Delete");
+        Button top3 = new Button("Top 3");
+        Button average = new Button("Average progress");
+        Button number = new Button("Number students");
+        Button course = new Button("Course progress");
         Button home = new Button("Return home");
 
         VBox box = new VBox();
 
         
-        box.getChildren().addAll(label, create, read, update, delete, home);
+        box.getChildren().addAll(label, top3, number, course, average, home);
         box.setSpacing(5);
 
         return layout;
 
         
     }
-
-    
 }

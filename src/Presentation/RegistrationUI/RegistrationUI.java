@@ -1,16 +1,18 @@
 package Presentation.RegistrationUI;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class RegistrationUI extends Application{
+public class RegistrationUI{
 
-    @Override
-    public void start(Stage windows) throws Exception {
+    public Parent getView(){
+        GridPane layout = new GridPane();
         
         Label label = new Label("Choose one of the options for the registration class");
         Button create = new Button("Create");
@@ -21,14 +23,12 @@ public class RegistrationUI extends Application{
 
         VBox box = new VBox();
 
-        Scene scene = new Scene(box,200,200);
+        
         box.getChildren().addAll(label, create, read, update, delete, home);
         box.setSpacing(5);
 
-        windows.setTitle("Registration");
+        return layout;
 
-        windows.setScene(scene);
-        windows.show();
         
     }
     
