@@ -1,6 +1,7 @@
 
 package DataLayer;
 
+import person.Student;
 
 public class SQLDAOFactory implements DAOFactory{
     private String connectionUrl;
@@ -33,6 +34,10 @@ public class SQLDAOFactory implements DAOFactory{
     public DAOModule createDAOModule() {
         return new SQLDAOModule(this.connectionUrl);
     }
-
+    
+    @Override
+    public boolean removeDAOStudent(Student student) {
+         return new SQLDAOStudent(this.connectionUrl).deleteStudent(student);
+    }
     
 }
