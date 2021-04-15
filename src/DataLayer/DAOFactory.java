@@ -1,5 +1,5 @@
 
-package DatabaseConnection;
+package DataLayer;
 
 public interface DAOFactory {
     public DAOStudent createDAOStudent();

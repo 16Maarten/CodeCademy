@@ -1,5 +1,5 @@
 
-package DatabaseConnection;
+package DataLayer;
 
 
 public class SQLDAOFactory implements DAOFactory{

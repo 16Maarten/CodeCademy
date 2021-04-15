@@ -1,5 +1,5 @@
 
-package DatabaseConnection;
+package DataLayer;
 
 import java.util.List;
 import person.Registration;
