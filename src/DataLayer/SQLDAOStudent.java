@@ -14,13 +14,13 @@ import java.util.Date;
 import java.util.List;
 import person.Student;
 
-public class SQLDAOStudent implements DAOStudent{
+public class SQLDAOStudent implements DAOStudent {
+
     private String connectionUrl;
 
     public SQLDAOStudent(String connectionUrl) {
         this.connectionUrl = connectionUrl;
     }
-    
 
     @Override
     public List<Student> findStudent() {
@@ -51,30 +51,28 @@ public class SQLDAOStudent implements DAOStudent{
                 String address = rs.getString("Address");
                 String residence = rs.getString("Residence");
                 String country = rs.getString("Country");
-                students.add(new Student(email,name,birthday,gender,address,residence,country));
-                
-            }
-        }
+                students.add(new Student(email, name, birthday, gender, address, residence, country));
 
-        // Handle any errors that may have occurred.
+            }
+        } // Handle any errors that may have occurred.
         catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (rs != null)
                 try {
-                    rs.close();
-                } catch (Exception e) {
-                }
+                rs.close();
+            } catch (Exception e) {
+            }
             if (stmt != null)
                 try {
-                    stmt.close();
-                } catch (Exception e) {
-                }
+                stmt.close();
+            } catch (Exception e) {
+            }
             if (con != null)
                 try {
-                    con.close();
-                } catch (Exception e) {
-                }
+                con.close();
+            } catch (Exception e) {
+            }
         }
         return students;
     }
@@ -82,13 +80,12 @@ public class SQLDAOStudent implements DAOStudent{
     @Override
     public boolean deleteStudent(Student student) {
         boolean answer;
-                // Connection beheert informatie over de connectie met de database.
+        // Connection beheert informatie over de connectie met de database.
         Connection con = null;
         // Statement zorgt dat we een SQL query kunnen uitvoeren.
         Statement stmt = null;
         // ResultSet is de tabel die we van de database terugkrijgen.
         // We kunnen door de rows heen stappen en iedere kolom lezen.
-        List<Student> students = new ArrayList<>();
         try {
             // 'Importeer' de driver die je gedownload hebt.
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -97,27 +94,25 @@ public class SQLDAOStudent implements DAOStudent{
 
             stmt = con.createStatement();
             // Voer de query uit op de database.
-            stmt.execute("Delete  FROM Cursist WHERE Email='"+student.getEmail()+"'");
+            stmt.execute("Delete  FROM Cursist WHERE Email='" + student.getEmail() + "'");
             answer = true;
-        }
-
-        // Handle any errors that may have occurred.
+        } // Handle any errors that may have occurred.
         catch (Exception e) {
             answer = false;
             e.printStackTrace();
         } finally {
             if (stmt != null)
                 try {
-                    stmt.close();
-                } catch (Exception e) {
-                }
+                stmt.close();
+            } catch (Exception e) {
+            }
             if (con != null)
                 try {
-                    con.close();
-                } catch (Exception e) {
-                }
+                con.close();
+            } catch (Exception e) {
+            }
         }
         return answer;
     }
-    
+
 }

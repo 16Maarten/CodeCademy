@@ -15,13 +15,13 @@ import java.util.List;
 import person.Student;
 import products.Course;
 
-public class SQLDAOCourse implements DAOCourse{
+public class SQLDAOCourse implements DAOCourse {
+
     private String connectionUrl;
 
     public SQLDAOCourse(String connectionUrl) {
         this.connectionUrl = connectionUrl;
     }
-    
 
     @Override
     public List<Course> findCourse() {
@@ -48,32 +48,68 @@ public class SQLDAOCourse implements DAOCourse{
                 String subject = rs.getString("Subject");
                 String introText = rs.getString("IntroText");
                 int difficultyIndicator = rs.getInt("DifficultyIndicator");
-                courses.add(new Course(name,subject,introText,difficultyIndicator));
-                
-            }
-        }
+                courses.add(new Course(name, subject, introText, difficultyIndicator));
 
-        // Handle any errors that may have occurred.
+            }
+        } // Handle any errors that may have occurred.
         catch (Exception e) {
             e.printStackTrace();
         } finally {
             if (rs != null)
                 try {
-                    rs.close();
-                } catch (Exception e) {
-                }
+                rs.close();
+            } catch (Exception e) {
+            }
             if (stmt != null)
                 try {
-                    stmt.close();
-                } catch (Exception e) {
-                }
+                stmt.close();
+            } catch (Exception e) {
+            }
             if (con != null)
                 try {
-                    con.close();
-                } catch (Exception e) {
-                }
+                con.close();
+            } catch (Exception e) {
+            }
         }
         return courses;
     }
-    
+
+    @Override
+    public boolean deleteCourse(Course course) {
+        boolean answer;
+        // Connection beheert informatie over de connectie met de database.
+        Connection con = null;
+        // Statement zorgt dat we een SQL query kunnen uitvoeren.
+        Statement stmt = null;
+        // ResultSet is de tabel die we van de database terugkrijgen.
+        // We kunnen door de rows heen stappen en iedere kolom lezen.
+        try {
+            // 'Importeer' de driver die je gedownload hebt.
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // Maak de verbinding met de database.
+            con = DriverManager.getConnection(connectionUrl);
+
+            stmt = con.createStatement();
+            // Voer de query uit op de database.
+            stmt.execute("Delete FROM Cursus WHERE CursusName='" + course.getCursusName() + "'");
+            answer = true;
+        } // Handle any errors that may have occurred.
+        catch (Exception e) {
+            answer = false;
+            e.printStackTrace();
+        } finally {
+            if (stmt != null)
+                try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            if (con != null)
+                try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return answer;
+    }
+
 }

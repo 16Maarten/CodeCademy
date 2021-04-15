@@ -17,6 +17,26 @@ public class Course {
         this.introText = introText;
         this.difficultyIndicator = difficultyIndicator;
     }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getIntroText() {
+        return introText;
+    }
+
+    public int getDifficultyIndicator() {
+        return difficultyIndicator;
+    }
+
+    public ArrayList<Module> getModuleList() {
+        return moduleList;
+    }
+
+    public ArrayList<Webcast> getWebcastList() {
+        return webcastList;
+    }
     
     public String getCursusName(){
         return this.cursusName;

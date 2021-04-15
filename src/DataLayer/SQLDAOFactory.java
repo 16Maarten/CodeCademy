@@ -1,7 +1,9 @@
 
 package DataLayer;
 
+import person.Registration;
 import person.Student;
+import products.Course;
 
 public class SQLDAOFactory implements DAOFactory{
     private String connectionUrl;
@@ -38,6 +40,16 @@ public class SQLDAOFactory implements DAOFactory{
     @Override
     public boolean removeDAOStudent(Student student) {
          return new SQLDAOStudent(this.connectionUrl).deleteStudent(student);
+    }
+
+    @Override
+    public boolean removeDAOCourse(Course course) {
+        return new SQLDAOCourse(this.connectionUrl).deleteCourse(course);
+    }
+
+    @Override
+    public boolean removeDAORegistration(Registration registration) {
+        return new SQLDAORegistration(this.connectionUrl).deleteRegistration(registration);
     }
     
 }
