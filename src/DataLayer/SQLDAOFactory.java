@@ -51,5 +51,10 @@ public class SQLDAOFactory implements DAOFactory{
     public boolean removeDAORegistration(Registration registration) {
         return new SQLDAORegistration(this.connectionUrl).deleteRegistration(registration);
     }
+
+    @Override
+    public boolean addDAOStudent(Student student) {
+        return new SQLDAOStudent(this.connectionUrl).addStudent(student);
+    }
     
 }

@@ -7,6 +7,7 @@ import products.Course;
 public interface DAOFactory {
     public DAOStudent createDAOStudent();
     public boolean removeDAOStudent(Student student);
+    public boolean addDAOStudent(Student student);
     public DAOCourse createDAOCourse();
     public boolean removeDAOCourse(Course course);
     public DAORegistration createDAORegistration();
