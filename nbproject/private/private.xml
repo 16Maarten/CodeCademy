@@ -2,21 +2,5 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/DataLayer/DAOFactory.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Application_Logic/RegistrationManager.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/person/Registration.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Main.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/DataLayer/SQLDAOWebcast.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Application_Logic/ModuleManager.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Application_Logic/WebcastManager.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Application_Logic/StudentManager.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/DataLayer/SQLDAOCourse.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/products/Course.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Application_Logic/CourseManager.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/DataLayer/SQLDAOFactory.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/HomeUI.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/DataLayer/SQLDAOModule.java</file>
-        </group>
     </open-files>
 </project-private>
