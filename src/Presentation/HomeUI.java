@@ -34,9 +34,10 @@ public class HomeUI extends Application{
         BorderPane layout = new BorderPane();
         VBox box = new VBox();
 
-        Scene scene = new Scene(layout);
+        Scene scene = new Scene(layout, 300, 300);
         box.getChildren().addAll(label, student, registration, course, overviews);
         box.setSpacing(5);
+        layout.setTop(box);
 
         student.setOnAction((event) -> layout.setCenter(studentUI.getView()));
         registration.setOnAction((event) -> layout.setCenter(registrationUI.getView()));
