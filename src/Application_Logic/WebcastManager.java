@@ -12,4 +12,8 @@ public class WebcastManager {
         this.webcasts = daoFactory.createDAOWebcast().findWebcast();
     }
 
+    public List<Webcast> getWebcasts() {
+        return webcasts;
+    }
+
 }

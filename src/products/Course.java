@@ -2,20 +2,23 @@
 package products;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
     private String cursusName;
     private String subject;
     private String introText;
     private int difficultyIndicator;
-    private ArrayList<Module> moduleList;
-    private ArrayList<Webcast> webcastList;
+    private List<Module> moduleList;
+    private List<Webcast> webcastList;
     
     public Course(String cursusName, String subject, String introText, int difficultyIndicator){
         this.cursusName = cursusName;
         this.subject = subject;
         this.introText = introText;
         this.difficultyIndicator = difficultyIndicator;
+        List<Module> moduleList = new ArrayList();
+        List<Webcast> webcastList = new ArrayList();
     }
 
     public String getSubject() {
@@ -30,11 +33,20 @@ public class Course {
         return difficultyIndicator;
     }
 
-    public ArrayList<Module> getModuleList() {
+    public List<Module> getModuleList() {
         return moduleList;
     }
 
-    public ArrayList<Webcast> getWebcastList() {
+    public void setModuleList(List<Module> moduleList) {
+        this.moduleList = moduleList;
+    }
+
+    public void setWebcastList(List<Webcast> webcastList) {
+        this.webcastList = webcastList;
+    }
+    
+
+    public List<Webcast> getWebcastList() {
         return webcastList;
     }
     

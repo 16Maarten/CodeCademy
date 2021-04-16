@@ -38,9 +38,10 @@ public class SQLDAOWebcast implements DAOWebcast {
             // 'Importeer' de driver die je gedownload hebt.
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             // Maak de verbinding met de database.
-            con = DriverManager.getConnection(connectionUrl);
+            con = DriverManager.getConnection(this.connectionUrl);
 
             stmt = con.createStatement();
+            stmt2 = con.createStatement();
             // Voer de query uit op de database.
             rs = stmt.executeQuery("SELECT * FROM Webcast");
 
@@ -51,11 +52,11 @@ public class SQLDAOWebcast implements DAOWebcast {
                 String expertOrganisation = rs.getString("ExpertOrganisation");
                 int contentItemId = rs.getInt("ContentItemId");
                 rs2 = stmt2.executeQuery("SELECT * FROM ContentItem WHERE ContentItemId =" + contentItemId);
-                                    Date publicationDate = null;
-                    String status = "";
-                    String title = "";
-                    String description = "";
-                    String cursusName = "";
+                Date publicationDate = null;
+                String status = "";
+                String title = "";
+                String description = "";
+                String cursusName = "";
                 while (rs2.next()) {
                     publicationDate = rs2.getDate("PublicationDate");
                     status = rs2.getString("Status");

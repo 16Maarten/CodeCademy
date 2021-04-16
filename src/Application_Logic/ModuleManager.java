@@ -12,4 +12,8 @@ public class ModuleManager {
         this.modules = daoFactory.createDAOModule().findModule();
     }
 
+    public List<Module> getModules() {
+        return modules;
+    }
+
 }
