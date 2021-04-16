@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -16,36 +17,26 @@ public class CourseUI{
 
     public Parent getView(){
         BorderPane layout = new BorderPane();
-        
-        Label label = new Label("Choose one of the options for the course class");
-        Button create = new Button("Create");
+        Button create = new Button("Create course");
+        create.setMaxWidth(Double.MAX_VALUE);
         CourseCreateUI createUI = new CourseCreateUI();
 
-        Button read = new Button("Read");
+        Button read = new Button("Info course");
+        read.setMaxWidth(Double.MAX_VALUE);
         CourseReadUI readUI = new CourseReadUI();
 
-        Button update = new Button("Update");
+        Button update = new Button("Update course");
+        update.setMaxWidth(Double.MAX_VALUE);
         CourseUpdateUI updateUI = new CourseUpdateUI();
 
-        Button delete = new Button("Delete");
+        Button delete = new Button("Delete course");
+        delete.setMaxWidth(Double.MAX_VALUE);
         CourseDeleteUI deleteUI = new CourseDeleteUI();
 
-        Button home = new Button("Return home");
-
-
-        // layout.setAlignment(Pos.TOP_CENTER);
-        // layout.setPadding(new Insets(10, 10, 10, 10));
-        
-        // layout.add(label, 0, 0);
-        // layout.add(create, 0, 1);
-        // layout.add(read, 0, 2);
-        // layout.add(update, 0, 3);
-        // layout.add(delete, 0, 4);
-        // layout.add(home, 0, 5);
-
         VBox box = new VBox();
-        box.getChildren().addAll(label, create, read, update, delete, home);
-        layout.setTop(box);
+        box.getChildren().addAll( create, read, update, delete);
+        box.setSpacing(25);
+        layout.setCenter(box);
 
         create.setOnAction((event) -> layout.setCenter(createUI.getView()));
         read.setOnAction((event) -> layout.setCenter(readUI.getView()));

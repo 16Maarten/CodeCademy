@@ -1,8 +1,13 @@
 
 import Application_Logic.CourseManager;
+import Application_Logic.RegistrationManager;
+import Application_Logic.StudentManager;
 import DataLayer.DAOFactory;
 import DataLayer.SQLDAOFactory;
+import Presentation.HomeUI;
 import java.util.List;
+import javafx.application.Application;
+import javafx.stage.Stage;
 import products.Course;
 
 /*
@@ -19,17 +24,9 @@ public class Main {
     public static void main(String[] args) {
         String connectionUrl = "jdbc:sqlserver://LAPTOP-Q21ELVRV;databaseName=ProgRDB;integratedSecurity=true";
         DAOFactory factory = new SQLDAOFactory(connectionUrl);
-        CourseManager manager = new CourseManager(factory);
-        List<Course> courses = manager.getCourses();
-        for (int i = 0; i < courses.size(); i++) {
-            System.out.println(courses.get(i).getCursusName());        
-            if (courses.get(i).getWebcastList() != null) {
-                System.out.println(courses.get(i).getWebcastList());
-            }
-            
-            if (courses.get(i).getModuleList() != null) {
-                System.out.println(courses.get(i).getModuleList());
-            }
-        }
+        CourseManager courseManager = new CourseManager(factory);
+        StudentManager studentmanager = new StudentManager(factory);
+        RegistrationManager registrationManager = new RegistrationManager(factory);
     }
 }
+
