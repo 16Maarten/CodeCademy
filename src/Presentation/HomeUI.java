@@ -20,7 +20,7 @@ public class HomeUI extends Application{
         Label label = new Label("Click on one of the buttons for further actions");
         Button student = new Button("Student");
         StudentUI studentUI = new StudentUI();
-        
+
         Button registration = new Button("Registration");
         RegistrationUI registrationUI = new RegistrationUI();
 
@@ -30,7 +30,6 @@ public class HomeUI extends Application{
         Button overviews = new Button("Overviews");
         OverviewsUI overviewsUI = new OverviewsUI();
 
-        
         BorderPane layout = new BorderPane();
         VBox box = new VBox();
 
@@ -55,5 +54,3 @@ public class HomeUI extends Application{
     }
 
 }
-    
-

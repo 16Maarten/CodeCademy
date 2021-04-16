@@ -15,7 +15,7 @@ public class StudentManager {
         this.daoFactory = daoFactory;
     }
 
-    public boolean deleteSudent(String studentEmail) {
+    public boolean deleteStudent(String studentEmail) {
         for (int i = 0; i < this.students.size(); i++) {
             System.out.println(this.students.get(i).getEmail());
             if (this.students.get(i).getEmail().equals(studentEmail)) {
@@ -26,7 +26,7 @@ public class StudentManager {
         return false;
     }
 
-    public boolean addSudent(String email, String name, Date birthDate, String gender, String address, String residence, String country) {
+    public boolean addStudent(String email, String name, Date birthDate, String gender, String address, String residence, String country) {
         return this.daoFactory.addDAOStudent(new Student(email, name, birthDate, gender, address, residence, country));
     }
 
