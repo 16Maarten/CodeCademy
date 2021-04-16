@@ -1,17 +1,21 @@
 package Presentation.CourseUI;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CourseDeleteUI extends Application{
+public class CourseDeleteUI{
 
-    @Override
-    public void start(Stage windows) throws Exception {
+    
+    public Parent getView(){
+        GridPane layout = new GridPane();
+        
         Label courseName = new Label("Course name");
         TextField courseNameInput = new TextField();
 
@@ -28,20 +32,27 @@ public class CourseDeleteUI extends Application{
         TextField difficultyInput = new TextField();
 
 
-        Button button = new Button("Delete");
+        Button button = new Button("Add");
         Button backButton = new Button("Back");
 
-        VBox box = new VBox();
+        // VBox box = new VBox();
 
-        Scene scene = new Scene(box,200,200);
-        box.getChildren().addAll(courseName, courseNameInput, contentId, contentIdInput, subject, subjectInput, introText, introTextInput
-        , difficulty, difficultyInput,button, backButton);
-        box.setSpacing(2);
+        // Scene scene = new Scene(box,200,200);
 
-        windows.setTitle("Course delete");
+        layout.add(courseName, 0,0);
+        layout.add(courseNameInput, 0,1);
+        layout.add(contentId, 0,2);
+        layout.add(contentIdInput, 0,3);
+        layout.add(subject, 0,4);
+        layout.add(subjectInput, 0,5);
+        layout.add(introText, 0,6);
+        layout.add(introTextInput, 0,7);
+        layout.add(difficulty, 0,8);
+        layout.add(difficultyInput, 0,9);
+        layout.add(button, 0,10);
+        layout.add(backButton, 0,11);
 
-        windows.setScene(scene);
-        windows.show();
+        return layout;
         
     }
     

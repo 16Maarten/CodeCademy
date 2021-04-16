@@ -1,29 +1,27 @@
 package Presentation.RegistrationUI;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class RegistrationReadUI extends Application{
+public class RegistrationReadUI{
 
-    @Override
-    public void start(Stage windows) throws Exception {
-        Label name = new Label("Registrations:");
+    
+    public Parent getView(){
+        GridPane layout = new GridPane();
+
+        Label name = new Label("Courses:");
         Button backButton = new Button("Back");
         
-        VBox box = new VBox();
+        layout.add(name, 0, 0);
+        layout.add(backButton, 0, 1);
 
-        Scene scene = new Scene(box,200,200);
-        box.getChildren().addAll(name, backButton);
-        box.setSpacing(5);
-
-        windows.setTitle("Registrations");
-
-        windows.setScene(scene);
-        windows.show();
+        return layout;
         
     }
     

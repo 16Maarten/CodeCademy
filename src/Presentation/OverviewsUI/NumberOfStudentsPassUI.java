@@ -1,33 +1,34 @@
 package Presentation.OverviewsUI;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import products.Course;
 
-public class NumberOfStudentsPassUI extends Application{
+public class NumberOfStudentsPassUI{
 
-    @Override
-    public void start(Stage windows) {
+    
+    public Parent getView() {
+        GridPane layout = new GridPane();
+
         Label name = new Label("Course:");
         ComboBox comboBox = new ComboBox();
 
         Button getButton = new Button("Get amount");
         Button backButton = new Button("Back");
         
-        VBox box = new VBox();
+        layout.add(name, 0, 0);
+        layout.add(comboBox, 0, 1);
+        layout.add(getButton, 0, 2);
+        layout.add(backButton, 0, 3);
 
-        Scene scene = new Scene(box,200,200);
-        box.getChildren().addAll(name, backButton);
-        box.setSpacing(5);
-
-        windows.setTitle("Number of students pass");
-
-        windows.setScene(scene);
-        windows.show();
+        return layout;
         
     }
     

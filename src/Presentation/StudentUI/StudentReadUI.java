@@ -1,29 +1,30 @@
 package Presentation.StudentUI;
 
 import javafx.application.Application;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StudentReadUI extends Application{
+public class StudentReadUI{
 
-    @Override
-    public void start(Stage windows) throws Exception {
-        Label name = new Label("Students:");
-        Button backButton = new Button("Back");
+    public Parent getView() {
+
+        BorderPane layout = new BorderPane();
         
+        Label label = new Label("Students:");
+        Button backButton = new Button("Back");
+
         VBox box = new VBox();
+        box.getChildren().addAll(label, backButton);
+        layout.setTop(box);
+        
 
-        Scene scene = new Scene(box,200,200);
-        box.getChildren().addAll(name, backButton);
-        box.setSpacing(5);
-
-        windows.setTitle("Students");
-
-        windows.setScene(scene);
-        windows.show();
+        return layout;
         
     }
     
