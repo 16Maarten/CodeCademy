@@ -37,7 +37,7 @@ public class RegistrationUI {
 
         Button read = new Button("Info Registrations");
         read.setMaxWidth(Double.MAX_VALUE);
-        RegistrationReadUI readUI = new RegistrationReadUI(registrationManager);
+        RegistrationReadUI readUI = new RegistrationReadUI(registrationManager,courseManager,studentManager);
 
         Button update = new Button("Update Registration");
         update.setMaxWidth(Double.MAX_VALUE);
@@ -45,7 +45,7 @@ public class RegistrationUI {
 
         Button delete = new Button("Delete Registration");
         delete.setMaxWidth(Double.MAX_VALUE);
-        RegistrationDeleteUI deleteUI = new RegistrationDeleteUI(registrationManager);
+        RegistrationDeleteUI deleteUI = new RegistrationDeleteUI(registrationManager,courseManager,studentManager);
 
         VBox box = new VBox();
         box.getChildren().addAll(create, read, update, delete);

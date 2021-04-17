@@ -1,51 +1,101 @@
 package Presentation.RegistrationUI;
 
+import Application_Logic.CourseManager;
 import Application_Logic.RegistrationManager;
+import Application_Logic.StudentManager;
+import Presentation.StudentUI.StudentUI;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import person.Registration;
+import person.Student;
+import products.Course;
 
-public class RegistrationDeleteUI{
-    private RegistrationManager manager;
+public class RegistrationDeleteUI {
 
-    public RegistrationDeleteUI(RegistrationManager manager) {
-        this.manager = manager;
+    private RegistrationManager registrationManager;
+    private CourseManager courseManager;
+    private StudentManager studentmanager;
+    private List<Course> courses;
+    private List<Student> students;
+    private List<Registration> registrations;
+
+    public RegistrationDeleteUI(RegistrationManager registrationManager, CourseManager courseManager, StudentManager studentManager) {
+        this.registrationManager = registrationManager;
+        this.courseManager = courseManager;
+        this.studentmanager = studentManager;
     }
-    
-    public Parent getView(){
-        GridPane layout = new GridPane();
-        
-        Label registration = new Label("Registration date");
-        TextField registrationInput = new TextField();
 
-        Label student = new Label("Student");
-        TextField studentInput = new TextField();
+    public Parent getView() {
+        courses = courseManager.getCourses();
+        ArrayList<String> courseNames = new ArrayList();
+        for (int i = 0; i < courses.size(); i++) {
+            courseNames.add(courses.get(i).getCursusName());
+        }
 
-        Label course = new Label("Course");
-        TextField courseInput = new TextField();
+        students = studentmanager.getStudents();
+        ArrayList<String> studentNames = new ArrayList();
+        for (int i = 0; i < students.size(); i++) {
+            studentNames.add(students.get(i).getEmail());
+        }
 
-        Button button = new Button("Add");
+        this.registrations = this.registrationManager.getRegistrations();
+        ArrayList<String> registrationDates = new ArrayList();
+        for (int i = 0; i < registrations.size(); i++) {
+            registrationDates.add(registrations.get(i).getRegistrationDate());
+        }
+
+        VBox layout = new VBox();
+
+        Label emailTitle = new Label("Select student email");
+        ComboBox studentsField = new ComboBox(FXCollections.observableArrayList(studentNames));
+        studentsField.setMaxWidth(Double.MAX_VALUE);
+        Label courseTitle = new Label("Select student email");
+        ComboBox coursesField = new ComboBox(FXCollections.observableArrayList(courseNames));
+        coursesField.setMaxWidth(Double.MAX_VALUE);
+        Label message = new Label();
+        Button deleteButton = new Button("Delete Registration");
+        deleteButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
+        backButton.setMaxWidth(Double.MAX_VALUE);
+        RegistrationUI registrationUI = new RegistrationUI();
+        layout.getChildren().addAll(emailTitle, studentsField, courseTitle, coursesField, deleteButton, backButton, message);
+        layout.setSpacing(5);
 
-        layout.add(registration, 0, 0);
-        layout.add(registrationInput, 0, 1);
-        layout.add(student, 0, 2);
-        layout.add(studentInput, 0, 3);
-        layout.add(course, 0, 4);
-        layout.add(courseInput, 0, 5);
-        layout.add(button, 0, 6);
-        layout.add(backButton, 0, 7);
+        backButton.setOnAction((event) -> {
+            layout.getChildren().clear();
+            layout.getChildren().add(registrationUI.getView());
+        });
+
+        deleteButton.setOnAction((event) -> {
+            String emailStudent = String.valueOf(studentsField.getValue());
+            String courseName = String.valueOf(coursesField.getValue());
+            String regsitrationDate = "";
+            for (int i = 0; i < registrations.size(); i++) {
+                if (registrations.get(i).getEmail().equals(studentsField.getValue()) && registrations.get(i).getCursusName().equals(coursesField.getValue())) {
+                    regsitrationDate = this.registrations.get(i).getRegistrationDate();
+                }
+            }
+            boolean answer = registrationManager.deleteRegistration(courseName, emailStudent, regsitrationDate);
+            if (answer) {
+                message.setText("Registration deleted");
+            } else {
+                message.setText("Something went wrong try again");
+            }
+        });
 
         return layout;
-        
+
     }
 
 }
-    
-

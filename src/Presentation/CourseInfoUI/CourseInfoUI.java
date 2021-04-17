@@ -1,9 +1,8 @@
-package Presentation.StudentUI;
+package Presentation.CourseInfoUI;
 
+import Presentation.CourseUI.*;
 import Application_Logic.CourseManager;
 import Application_Logic.DataManager;
-import Application_Logic.StudentManager;
-import Presentation.HomeUI;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,36 +12,36 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StudentUI {
+public class CourseInfoUI {
 
-    private StudentManager studentManager;
+    private CourseManager courseManager;
 
-    public StudentUI() {
+    public CourseInfoUI() {
         DataManager manager = new DataManager();
-        studentManager = manager.getStudentmanager();
+        courseManager = manager.getCourseManager();
     }
 
     public Parent getView() {
-
         BorderPane layout = new BorderPane();
-        Button create = new Button("Create Student");
+        Button create = new Button("Create course");
         create.setMaxWidth(Double.MAX_VALUE);
-        StudentCreateUI createUI = new StudentCreateUI(studentManager);
+        CourseCreateUI createUI = new CourseCreateUI(courseManager);
 
-        Button read = new Button("Info Student");
+        Button read = new Button("Info course");
         read.setMaxWidth(Double.MAX_VALUE);
-        StudentReadUI readUI = new StudentReadUI(studentManager);
+        CourseReadUI readUI = new CourseReadUI(courseManager);
 
-        Button update = new Button("Update Student");
+        Button update = new Button("Update course");
         update.setMaxWidth(Double.MAX_VALUE);
-        StudentUpdateUI updateUI = new StudentUpdateUI();
+        CourseUpdateUI updateUI = new CourseUpdateUI();
 
         Button delete = new Button("Delete course");
         delete.setMaxWidth(Double.MAX_VALUE);
-        StudentDeleteUI deleteUI = new StudentDeleteUI(studentManager);
+        CourseDeleteUI deleteUI = new CourseDeleteUI(courseManager);
 
         VBox box = new VBox();
         box.getChildren().addAll(create, read, update, delete);
