@@ -1,59 +1,66 @@
 package Presentation.CourseUI;
 
+import Application_Logic.CourseManager;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import products.Course;
 
-public class CourseDeleteUI{
+public class CourseDeleteUI {
 
-    
-    public Parent getView(){
-        GridPane layout = new GridPane();
-        
-        Label courseName = new Label("Course name");
-        TextField courseNameInput = new TextField();
+    private CourseManager manager;
+    private List<Course> courses;
 
-        Label contentId = new Label("Content item id");
-        TextField contentIdInput = new TextField();
+    public CourseDeleteUI(CourseManager manager) {
+        this.manager = manager;
+    }
 
-        Label subject = new Label("Subject");
-        TextField subjectInput = new TextField();
+    public Parent getView() {
+        VBox layout = new VBox();
+        courses = manager.getCourses();
+        ArrayList<String> courseNames = new ArrayList();
+        for (int i = 0; i < courses.size(); i++) {
+            courseNames.add(courses.get(i).getCursusName());
+        }
 
-        Label introText = new Label("Intro text");
-        TextField introTextInput = new TextField();
-
-        Label difficulty = new Label("Difficulty indicator");
-        TextField difficultyInput = new TextField();
-
-
-        Button button = new Button("Add");
+        Label name = new Label("Select course");
+        ComboBox coursesField = new ComboBox(FXCollections.observableArrayList(courseNames));
+        Label message = new Label();
+        Button deleteButton = new Button("Delete course");
+        deleteButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
+        backButton.setMaxWidth(Double.MAX_VALUE);
+        CourseUI courseUI = new CourseUI();
+        layout.getChildren().addAll(name, coursesField, deleteButton, backButton, message);
+        layout.setSpacing(5);
 
-        // VBox box = new VBox();
+        backButton.setOnAction((event) -> {
+            layout.getChildren().clear();
+            layout.getChildren().add(courseUI.getView());
+        });
 
-        // Scene scene = new Scene(box,200,200);
-
-        layout.add(courseName, 0,0);
-        layout.add(courseNameInput, 0,1);
-        layout.add(contentId, 0,2);
-        layout.add(contentIdInput, 0,3);
-        layout.add(subject, 0,4);
-        layout.add(subjectInput, 0,5);
-        layout.add(introText, 0,6);
-        layout.add(introTextInput, 0,7);
-        layout.add(difficulty, 0,8);
-        layout.add(difficultyInput, 0,9);
-        layout.add(button, 0,10);
-        layout.add(backButton, 0,11);
+        deleteButton.setOnAction((event) -> {
+            String nameCourse = String.valueOf(coursesField.getValue());
+            boolean answer = manager.deleteCourse(nameCourse);
+            if (answer) {
+                message.setText("Deleted course: " + nameCourse);
+            } else {
+                message.setText("Something went wrong try again");
+            }
+        });
 
         return layout;
-        
+
     }
-    
+
 }

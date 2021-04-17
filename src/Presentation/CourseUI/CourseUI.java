@@ -40,7 +40,7 @@ public class CourseUI {
 
         Button delete = new Button("Delete course");
         delete.setMaxWidth(Double.MAX_VALUE);
-        CourseDeleteUI deleteUI = new CourseDeleteUI();
+        CourseDeleteUI deleteUI = new CourseDeleteUI(courseManager);
 
         VBox box = new VBox();
         box.getChildren().addAll(create, read, update, delete);

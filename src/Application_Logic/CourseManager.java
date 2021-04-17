@@ -23,13 +23,16 @@ public class CourseManager {
             System.out.println(this.courses.get(i).getCursusName());
             if (this.courses.get(i).getCursusName().equals(courseName)) {
                 System.out.println(this.courses.get(i));
-                return this.daoFactory.removeDAOCourse(this.courses.get(i));
+                boolean answer = this.daoFactory.removeDAOCourse(this.courses.get(i));
+                this.courses.remove(this.courses.get(i));
+                return answer;
             }
         }
         return false;
     }
 
     public boolean addCourse(String cursusName, String subject, String introText, int difficultyIndicator) {
+        courses.add(new Course(cursusName, subject, introText, difficultyIndicator));
         return this.daoFactory.addDAOCourse(new Course(cursusName, subject, introText, difficultyIndicator));
     }
 
