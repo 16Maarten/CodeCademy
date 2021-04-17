@@ -43,6 +43,7 @@ public class StudentReadUI {
         Label adressOutput = new Label();
         Label residenceOutput = new Label();
         Label countryOutput = new Label();
+        Label postalCodeOutput = new Label();
         ComboBox studentsField = new ComboBox(FXCollections.observableArrayList(courseNames));
         studentsField.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
@@ -69,11 +70,12 @@ public class StudentReadUI {
                     adressOutput.setText("Adress: " + students.get(i).getAddress());
                     residenceOutput.setText("Residence: " + students.get(i).getResidence());
                     countryOutput.setText("Country: " + students.get(i).getCountry());
+                    postalCodeOutput.setText("PostalCode: " + students.get(i).getPostalCode());
                 }
             }
 
             layout.getChildren().clear();
-            layout.getChildren().addAll(name, studentsField, studentsNameOutput, emailOutput, birthdayOutput, genderOutput, adressOutput, residenceOutput, countryOutput, infoButton, backButton);
+            layout.getChildren().addAll(name, studentsField, studentsNameOutput, emailOutput, birthdayOutput, genderOutput, adressOutput, residenceOutput, countryOutput,postalCodeOutput, infoButton, backButton);
         });;
 
         return layout;

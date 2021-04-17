@@ -26,7 +26,7 @@ public class RegistrationManager {
         return false;
     }
 
-    public boolean addRegistration(Date registrationDate, String email, String cursusName) {
+    public boolean addRegistration(String registrationDate, String email, String cursusName) {
         return this.daoFactory.addDAORegistration(new Registration(registrationDate, email, cursusName));
     }
 

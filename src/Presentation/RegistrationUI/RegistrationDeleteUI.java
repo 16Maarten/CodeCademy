@@ -1,5 +1,6 @@
 package Presentation.RegistrationUI;
 
+import Application_Logic.RegistrationManager;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +12,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class RegistrationDeleteUI{
+    private RegistrationManager manager;
 
+    public RegistrationDeleteUI(RegistrationManager manager) {
+        this.manager = manager;
+    }
     
     public Parent getView(){
         GridPane layout = new GridPane();

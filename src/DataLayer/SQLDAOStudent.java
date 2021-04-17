@@ -52,7 +52,8 @@ public class SQLDAOStudent implements DAOStudent {
                 String address = rs.getString("Address");
                 String residence = rs.getString("Residence");
                 String country = rs.getString("Country");
-                students.add(new Student(email, name, birthday, gender, address, residence, country));
+                String postalCode = rs.getString("PostalCode");
+                students.add(new Student(email, name, birthday, gender, address, residence, country, postalCode));
 
             }
         } // Handle any errors that may have occurred.
@@ -134,7 +135,7 @@ public class SQLDAOStudent implements DAOStudent {
             stmt = con.createStatement();
             // Voer de query uit op de database.
             
-            stmt.execute("INSERT INTO Cursist VALUES('"+student.getEmail()+"','"+student.getName()+"','"+student.getBirthDate()+"','"+student.getGender()+"','"+student.getAddress()+"','"+student.getResidence()+"','"+student.getCountry()+"')");
+            stmt.execute("INSERT INTO Cursist VALUES('"+student.getEmail()+"','"+student.getName()+"','"+student.getBirthDate()+"','"+student.getGender()+"','"+student.getAddress()+"','"+student.getResidence()+"','"+student.getCountry()+"','"+student.getPostalCode()+"')");
             answer = true;
         } // Handle any errors that may have occurred.
         catch (Exception e) {

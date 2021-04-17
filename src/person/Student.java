@@ -13,8 +13,9 @@ public class Student {
     private String address;
     private String residence;
     private String country;
+    private String postalCode;
     
-    public Student(String email, String name, String birthDate, String gender, String address, String residence, String country){
+    public Student(String email, String name, String birthDate, String gender, String address, String residence, String country, String postalCode){
         this.email = email;
         this.name = name;
         this.birthDate = birthDate;
@@ -22,6 +23,7 @@ public class Student {
         this.address = address;
         this.residence = residence;
         this.country = country;
+        this.postalCode = postalCode;
     }
 
     public String getEmail() {
@@ -50,6 +52,10 @@ public class Student {
 
     public String getCountry() {
         return country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
     }
     
     

@@ -43,7 +43,7 @@ public class SQLDAORegistration implements DAORegistration {
             rs = stmt.executeQuery("SELECT * FROM Registration");
 
             while (rs.next()) {
-                Date registrationDate = rs.getDate("RegistrationDate");
+                String registrationDate = rs.getString("RegistrationDate");
                 String email = rs.getString("Email");
                 String cursusName = rs.getString("CursusName");
                 registrations.add(new Registration(registrationDate, email, cursusName));

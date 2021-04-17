@@ -5,17 +5,17 @@ import java.util.Date;
 
 
 public class Registration {
-    private Date registrationDate;
+    private String registrationDate;
     private String email;
     private String cursusName;
 
-    public Registration(Date registrationDate, String email, String cursusName) {
+    public Registration(String registrationDate, String email, String cursusName) {
         this.registrationDate = registrationDate;
         this.email = email;
         this.cursusName = cursusName;
     }
 
-    public Date getRegistrationDate() {
+    public String getRegistrationDate() {
         return registrationDate;
     }
 

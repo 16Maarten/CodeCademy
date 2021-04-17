@@ -32,9 +32,9 @@ public class StudentCreateUI {
         Label birthDate = new Label("Birthday");
         DatePicker datePicker = new DatePicker();
         datePicker.setMaxWidth(Double.MAX_VALUE);
-        
+
         Label gender = new Label("Gender");
-        ComboBox genderField = new ComboBox(FXCollections.observableArrayList("M","F"));
+        ComboBox genderField = new ComboBox(FXCollections.observableArrayList("M", "F"));
         genderField.setMaxWidth(Double.MAX_VALUE);
         Label address = new Label("Address");
         TextField addressInput = new TextField();
@@ -44,7 +44,10 @@ public class StudentCreateUI {
 
         Label country = new Label("Country");
         TextField countryInput = new TextField();
-        
+
+        Label postalCode = new Label("PostalCode");
+        TextField postalCodeInput = new TextField();
+
         Button addButton = new Button("Add Student");
         addButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
@@ -52,7 +55,7 @@ public class StudentCreateUI {
         StudentUI studentUI = new StudentUI();
         Label message = new Label();
 
-        layout.getChildren().addAll(name, nameInput, email, emailInput, birthDate, datePicker, gender, genderField, address, addressInput,residence,residenceInput,country,countryInput, addButton, backButton, message);
+        layout.getChildren().addAll(name, nameInput, email, emailInput, birthDate, datePicker, gender, genderField, address, addressInput, residence, residenceInput, country, countryInput, postalCode, postalCodeInput, addButton, backButton, message);
         layout.setSpacing(5);
         backButton.setOnAction((event) -> {
             layout.getChildren().clear();
@@ -67,7 +70,8 @@ public class StudentCreateUI {
             String adressStudent = addressInput.getText();
             String residenceStudent = residenceInput.getText();
             String countryStudent = countryInput.getText();
-            boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent,adressStudent,residenceStudent,countryStudent);
+            String postalCodeStudent = postalCodeInput.getText();
+            boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent, adressStudent, residenceStudent, countryStudent, postalCodeStudent);
             if (answer) {
                 message.setText("Added student: " + nameStudent);
             } else {

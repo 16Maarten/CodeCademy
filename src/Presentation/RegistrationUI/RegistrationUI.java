@@ -1,5 +1,9 @@
 package Presentation.RegistrationUI;
 
+import Application_Logic.CourseManager;
+import Application_Logic.DataManager;
+import Application_Logic.RegistrationManager;
+import Application_Logic.StudentManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,41 +16,41 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class RegistrationUI{
+public class RegistrationUI {
 
-    public Parent getView(){
+    private RegistrationManager registrationManager;
+    private CourseManager courseManager;
+    private StudentManager studentManager;
+    
+    public RegistrationUI() {
+        DataManager manager = new DataManager();
+        this.registrationManager = manager.getRegistrationManager();
+        this.courseManager = manager.getCourseManager();
+        this.studentManager = manager.getStudentmanager();
+    }
+
+    public Parent getView() {
         BorderPane layout = new BorderPane();
-        
-        Label label = new Label("Choose one of the options for the registration class");
+        Button create = new Button("Create Registration");
+        create.setMaxWidth(Double.MAX_VALUE);
+        RegistrationCreateUI createUI = new RegistrationCreateUI(registrationManager,courseManager,studentManager);
 
-        Button create = new Button("Create");
-        RegistrationCreateUI createUI = new RegistrationCreateUI();
+        Button read = new Button("Info Registrations");
+        read.setMaxWidth(Double.MAX_VALUE);
+        RegistrationReadUI readUI = new RegistrationReadUI(registrationManager);
 
-        Button read = new Button("Read");
-        RegistrationReadUI readUI = new RegistrationReadUI();
-
-        Button update = new Button("Update");
+        Button update = new Button("Update Registration");
+        update.setMaxWidth(Double.MAX_VALUE);
         RegistrationUpdateUI updateUI = new RegistrationUpdateUI();
 
-        Button delete = new Button("Delete");
-        RegistrationDeleteUI deleteUI = new RegistrationDeleteUI();
-
-        Button home = new Button("Return home");
-
-
-        // layout.setAlignment(Pos.TOP_CENTER);
-        // layout.setPadding(new Insets(10, 10, 10, 10));
-        
-        // layout.add(label, 0, 0);
-        // layout.add(create, 0, 1);
-        // layout.add(read, 0, 2);
-        // layout.add(update, 0, 3);
-        // layout.add(delete, 0, 4);
-        // layout.add(home, 0, 5);
+        Button delete = new Button("Delete Registration");
+        delete.setMaxWidth(Double.MAX_VALUE);
+        RegistrationDeleteUI deleteUI = new RegistrationDeleteUI(registrationManager);
 
         VBox box = new VBox();
-        box.getChildren().addAll(label, create, read, update, delete, home);
-        layout.setTop(box);
+        box.getChildren().addAll(create, read, update, delete);
+        box.setSpacing(25);
+        layout.setCenter(box);
 
         create.setOnAction((event) -> layout.setCenter(createUI.getView()));
         read.setOnAction((event) -> layout.setCenter(readUI.getView()));
@@ -55,7 +59,6 @@ public class RegistrationUI{
 
         return layout;
 
-        
     }
-    
+
 }

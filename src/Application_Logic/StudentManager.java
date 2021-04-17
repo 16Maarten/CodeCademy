@@ -28,9 +28,9 @@ public class StudentManager {
         return false;
     }
 
-    public boolean addStudent(String email, String name, String birthDate, String gender, String address, String residence, String country) {
-        this.students.add(new Student(email, name, birthDate, gender, address, residence, country));
-        return this.daoFactory.addDAOStudent(new Student(email, name, birthDate, gender, address, residence, country));
+    public boolean addStudent(String email, String name, String birthDate, String gender, String address, String residence, String country, String postalCode) {
+        this.students.add(new Student(email, name, birthDate, gender, address, residence, country,postalCode));
+        return this.daoFactory.addDAOStudent(new Student(email, name, birthDate, gender, address, residence, country,postalCode));
     }
 
     public List<Student> getStudents() {

@@ -1,5 +1,8 @@
 package Presentation.RegistrationUI;
 
+import Application_Logic.CourseManager;
+import Application_Logic.RegistrationManager;
+import Application_Logic.StudentManager;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,12 +13,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class RegistrationCreateUI{
+public class RegistrationCreateUI {
 
-    
-    public Parent getView(){
+    private RegistrationManager registrationManager;
+    private CourseManager courseManager;
+    private StudentManager studentmanager;
+
+    public RegistrationCreateUI(RegistrationManager registrationManager, CourseManager courseManager,StudentManager studentManager) {
+        this.registrationManager = registrationManager;
+        this.courseManager = courseManager;
+        this.studentmanager = studentManager;
+    }
+
+    public Parent getView() {
         GridPane layout = new GridPane();
-        
+
         Label registration = new Label("Registration date");
         TextField registrationInput = new TextField();
 
@@ -38,6 +50,6 @@ public class RegistrationCreateUI{
         layout.add(backButton, 0, 7);
 
         return layout;
-        
+
     }
 }
