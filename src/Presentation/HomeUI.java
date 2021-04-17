@@ -3,6 +3,7 @@ package Presentation;
 import Application_Logic.CourseManager;
 import Application_Logic.RegistrationManager;
 import Application_Logic.StudentManager;
+import Presentation.CourseInfoUI.CourseInfoUI;
 import Presentation.CourseUI.CourseUI;
 import Presentation.OverviewsUI.OverviewsUI;
 import Presentation.RegistrationUI.RegistrationUI;
@@ -23,8 +24,8 @@ public class HomeUI extends Application {
     public void start(Stage windows) {
 
         Label void1 = new Label("    ");
-        Label void2 = new Label("     ");
-        Label void3 = new Label("     ");
+        Label void2 = new Label("    ");
+        Label void3 = new Label("    ");
         Label void4 = new Label("    ");
         HBox hbox = new HBox(void1, void2);
         HBox hbox2 = new HBox(void3, void4);
@@ -41,12 +42,15 @@ public class HomeUI extends Application {
 
         Button overviews = new Button("Overviews");
         OverviewsUI overviewsUI = new OverviewsUI();
+        
+        Button followCourse = new Button("Follow Course");
+        CourseInfoUI courseInfoUI = new CourseInfoUI();
 
         BorderPane layout = new BorderPane();
         HBox box = new HBox();
         box.setAlignment(Pos.CENTER);
         Scene scene = new Scene(layout, 1000, 550);
-        box.getChildren().addAll(student, registration, course, overviews);
+        box.getChildren().addAll(student, registration, course, overviews, followCourse);
         box.setSpacing(25);
         box.setPrefHeight(50);
         layout.setTop(box);
@@ -56,6 +60,7 @@ public class HomeUI extends Application {
         registration.setOnAction((event) -> layout.setCenter(registrationUI.getView()));
         course.setOnAction((event) -> layout.setCenter(courseUI.getView()));
         overviews.setOnAction((event) -> layout.setCenter(overviewsUI.getView()));
+        followCourse.setOnAction((event) -> layout.setCenter(courseInfoUI.getView()));
 
         windows.setTitle("Codecademy");
 

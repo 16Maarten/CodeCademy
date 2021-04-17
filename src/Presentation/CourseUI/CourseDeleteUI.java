@@ -35,6 +35,7 @@ public class CourseDeleteUI {
 
         Label name = new Label("Select course");
         ComboBox coursesField = new ComboBox(FXCollections.observableArrayList(courseNames));
+        coursesField.setMaxWidth(Double.MAX_VALUE);
         Label message = new Label();
         Button deleteButton = new Button("Delete course");
         deleteButton.setMaxWidth(Double.MAX_VALUE);

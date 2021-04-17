@@ -3,6 +3,7 @@ package Presentation.CourseInfoUI;
 import Presentation.CourseUI.*;
 import Application_Logic.CourseManager;
 import Application_Logic.DataManager;
+import Application_Logic.RegistrationManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,40 +19,28 @@ import javafx.stage.Stage;
 
 public class CourseInfoUI {
 
+    private RegistrationManager registrationManager;
     private CourseManager courseManager;
 
     public CourseInfoUI() {
         DataManager manager = new DataManager();
+        registrationManager = manager.getRegistrationManager();
         courseManager = manager.getCourseManager();
     }
 
     public Parent getView() {
         BorderPane layout = new BorderPane();
-        Button create = new Button("Create course");
-        create.setMaxWidth(Double.MAX_VALUE);
-        CourseCreateUI createUI = new CourseCreateUI(courseManager);
+        Button watchCourse = new Button("Watch course");
+        watchCourse.setMaxWidth(Double.MAX_VALUE);
+        CourseWatchUI createWatchUI = new CourseWatchUI(registrationManager,courseManager);
 
-        Button read = new Button("Info course");
-        read.setMaxWidth(Double.MAX_VALUE);
-        CourseReadUI readUI = new CourseReadUI(courseManager);
-
-        Button update = new Button("Update course");
-        update.setMaxWidth(Double.MAX_VALUE);
-        CourseUpdateUI updateUI = new CourseUpdateUI();
-
-        Button delete = new Button("Delete course");
-        delete.setMaxWidth(Double.MAX_VALUE);
-        CourseDeleteUI deleteUI = new CourseDeleteUI(courseManager);
 
         VBox box = new VBox();
-        box.getChildren().addAll(create, read, update, delete);
+        box.getChildren().addAll(watchCourse);
         box.setSpacing(25);
         layout.setCenter(box);
 
-        create.setOnAction((event) -> layout.setCenter(createUI.getView()));
-        read.setOnAction((event) -> layout.setCenter(readUI.getView()));
-        update.setOnAction((event) -> layout.setCenter(updateUI.getView()));
-        delete.setOnAction((event) -> layout.setCenter(deleteUI.getView()));
+        watchCourse.setOnAction((event) -> layout.setCenter(createWatchUI.getView()));
 
         return layout;
 
