@@ -1,34 +1,41 @@
 package Presentation.StudentUI;
 
-import javafx.application.Application;
+import Application_Logic.StudentManager;
+import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class StudentCreateUI{
+public class StudentCreateUI {
 
-    
+    private StudentManager manager;
+
+    public StudentCreateUI(StudentManager manager) {
+        this.manager = manager;
+    }
+
     public Parent getView() {
 
-        GridPane layout = new GridPane();
-        
+        VBox layout = new VBox();
+
         Label name = new Label("Name");
         TextField nameInput = new TextField();
 
         Label email = new Label("Email");
         TextField emailInput = new TextField();
 
-        Label birthDate = new Label("Birth date");
-        TextField birthDateInput = new TextField();
-
+        Label birthDate = new Label("Birthday");
+        DatePicker datePicker = new DatePicker();
+        datePicker.setMaxWidth(Double.MAX_VALUE);
+        
         Label gender = new Label("Gender");
-        TextField genderInput = new TextField();
-
+        ComboBox genderField = new ComboBox(FXCollections.observableArrayList("M","F"));
+        genderField.setMaxWidth(Double.MAX_VALUE);
         Label address = new Label("Address");
         TextField addressInput = new TextField();
 
@@ -37,33 +44,39 @@ public class StudentCreateUI{
 
         Label country = new Label("Country");
         TextField countryInput = new TextField();
-
-        Button button = new Button("Add");
-        Button backButton = new Button("Back");
-
-        // VBox box = new VBox();
-
-        // Scene scene = new Scene(layout,200,200);
         
-        layout.add(name, 0, 0);
-        layout.add(nameInput, 0, 1);
-        layout.add(email, 0, 2);
-        layout.add(emailInput, 0, 3);
-        layout.add(birthDate, 0, 4);
-        layout.add(birthDateInput, 0, 5);
-        layout.add(gender, 0, 6);
-        layout.add(genderInput, 0, 7);
-        layout.add(address, 0, 8);
-        layout.add(addressInput, 0, 9);
-        layout.add(residence, 0, 10);
-        layout.add(residenceInput, 0, 11);
-        layout.add(country, 0, 12);
-        layout.add(countryInput, 0, 13);
-        layout.add(button, 0, 14);
-        layout.add(backButton, 0, 15);
+        Button addButton = new Button("Add Student");
+        addButton.setMaxWidth(Double.MAX_VALUE);
+        Button backButton = new Button("Back");
+        backButton.setMaxWidth(Double.MAX_VALUE);
+        StudentUI studentUI = new StudentUI();
+        Label message = new Label();
+
+        layout.getChildren().addAll(name, nameInput, email, emailInput, birthDate, datePicker, gender, genderField, address, addressInput,residence,residenceInput,country,countryInput, addButton, backButton, message);
+        layout.setSpacing(5);
+        backButton.setOnAction((event) -> {
+            layout.getChildren().clear();
+            layout.getChildren().add(studentUI.getView());
+        });
+
+        addButton.setOnAction((event) -> {
+            String nameStudent = nameInput.getText();
+            String emailStudent = emailInput.getText();
+            String birthdayStudent = String.valueOf(datePicker.getValue());
+            String genderStudent = String.valueOf(genderField.getValue());
+            String adressStudent = addressInput.getText();
+            String residenceStudent = residenceInput.getText();
+            String countryStudent = countryInput.getText();
+            boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent,adressStudent,residenceStudent,countryStudent);
+            if (answer) {
+                message.setText("Added student: " + nameStudent);
+            } else {
+                message.setText("Something went wrong try again");
+            }
+        });
 
         return layout;
-        
+
     }
-    
+
 }

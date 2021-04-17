@@ -1,5 +1,8 @@
 package Presentation.StudentUI;
 
+import Application_Logic.CourseManager;
+import Application_Logic.DataManager;
+import Application_Logic.StudentManager;
 import Presentation.HomeUI;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -13,46 +16,39 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class StudentUI{
-    
-    public Parent getView(){
+public class StudentUI {
+
+    private StudentManager studentManager;
+
+    public StudentUI() {
+        DataManager manager = new DataManager();
+        studentManager = manager.getStudentmanager();
+    }
+
+    public Parent getView() {
+
         BorderPane layout = new BorderPane();
-        
-        Label label = new Label("Choose one of the options for the student class");
-        Button create = new Button("Create");
-        StudentCreateUI createUI = new StudentCreateUI();
+        Button create = new Button("Create Student");
+        create.setMaxWidth(Double.MAX_VALUE);
+        StudentCreateUI createUI = new StudentCreateUI(studentManager);
 
-        Button read = new Button("Read");
-        StudentReadUI readUI = new StudentReadUI();
+        Button read = new Button("Info Student");
+        read.setMaxWidth(Double.MAX_VALUE);
+        StudentReadUI readUI = new StudentReadUI(studentManager);
 
-        Button update = new Button("Update");
+        Button update = new Button("Update Student");
+        update.setMaxWidth(Double.MAX_VALUE);
         StudentUpdateUI updateUI = new StudentUpdateUI();
 
-        Button delete = new Button("Delete");
-        StudentDeleteUI deleteUI = new StudentDeleteUI();
+        Button delete = new Button("Delete Student");
+        delete.setMaxWidth(Double.MAX_VALUE);
+        StudentDeleteUI deleteUI = new StudentDeleteUI(studentManager);
 
-        Button home = new Button("Return home");
-
-        // layout.set(Pos.TOP_CENTER);
-        // layout.setPadding(new Insets(10, 10, 10, 10));
-
-        // VBox box = new VBox();
-        // Scene scene = new Scene(box, 300, 300);
-        
-        // box.getChildren().addAll(label, create, read, update, delete, home);
-        // box.setSpacing(5);
-
-        // layout.add(label, 0, 0);
-        // layout.add(create, 0, 1);
-        // layout.add(read, 0, 2);
-        // layout.add(update, 0, 3);
-        // layout.add(delete, 0, 4);
-        // layout.add(home, 0, 5);
         VBox box = new VBox();
-        box.getChildren().addAll(label, create, read, update, delete, home);
-        layout.setTop(box);
+        box.getChildren().addAll(create, read, update, delete);
+        box.setSpacing(25);
+        layout.setCenter(box);
 
-        
         create.setOnAction((event) -> layout.setCenter(createUI.getView()));
         read.setOnAction((event) -> layout.setCenter(readUI.getView()));
         update.setOnAction((event) -> layout.setCenter(updateUI.getView()));
@@ -60,8 +56,6 @@ public class StudentUI{
 
         return layout;
 
-        
     }
 
-    
 }

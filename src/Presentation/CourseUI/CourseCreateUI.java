@@ -39,7 +39,7 @@ public class CourseCreateUI {
 
         spinner.setValueFactory(valueFactory);
 
-        Button addButton = new Button("Add");
+        Button addButton = new Button("Add course");
         addButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
         backButton.setMaxWidth(Double.MAX_VALUE);

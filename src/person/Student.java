@@ -1,19 +1,20 @@
 
 package person;
 
+import java.time.LocalDate;
 import java.util.Date;
 import products.*;
 
 public class Student {
     private String email;
     private String name;
-    private Date birthDate;
+    private String  birthDate;
     private String gender;
     private String address;
     private String residence;
     private String country;
     
-    public Student(String email, String name, Date birthDate, String gender, String address, String residence, String country){
+    public Student(String email, String name, String birthDate, String gender, String address, String residence, String country){
         this.email = email;
         this.name = name;
         this.birthDate = birthDate;
@@ -31,7 +32,7 @@ public class Student {
         return name;
     }
 
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 

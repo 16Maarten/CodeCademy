@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +47,7 @@ public class SQLDAOStudent implements DAOStudent {
             while (rs.next()) {
                 String email = rs.getString("Email");
                 String name = rs.getString("Name");
-                Date birthday = rs.getDate("BirthDate");
+                String birthday = rs.getString("BirthDate");
                 String gender = rs.getString("Gender");
                 String address = rs.getString("Address");
                 String residence = rs.getString("Residence");

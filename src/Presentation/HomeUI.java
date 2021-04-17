@@ -45,7 +45,7 @@ public class HomeUI extends Application {
         BorderPane layout = new BorderPane();
         HBox box = new HBox();
         box.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(layout, 800, 450);
+        Scene scene = new Scene(layout, 1000, 550);
         box.getChildren().addAll(student, registration, course, overviews);
         box.setSpacing(25);
         box.setPrefHeight(50);

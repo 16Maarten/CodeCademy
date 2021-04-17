@@ -1,65 +1,62 @@
 package Presentation.StudentUI;
 
+import Application_Logic.StudentManager;
+import Presentation.CourseUI.CourseUI;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import person.Student;
 
 public class StudentDeleteUI{
-
+    private StudentManager manager;
+    private List<Student> students;
+    public StudentDeleteUI(StudentManager manager) {
+        this.manager = manager;
+    }
     
     public Parent getView(){
-        GridPane layout = new GridPane();
-        
-        Label name = new Label("Name");
-        TextField nameInput = new TextField();
+         VBox layout = new VBox();
+        students = manager.getStudents();
+        ArrayList<String> courseNames = new ArrayList();
+        for (int i = 0; i < students.size(); i++) {
+            courseNames.add(students.get(i).getEmail());
+        }
 
-        Label email = new Label("Email");
-        TextField emailInput = new TextField();
-
-        Label birthDate = new Label("Birth date");
-        TextField birthDateInput = new TextField();
-
-        Label gender = new Label("Gender");
-        TextField genderInput = new TextField();
-
-        Label address = new Label("Address");
-        TextField addressInput = new TextField();
-
-        Label residence = new Label("Residence");
-        TextField residenceInput = new TextField();
-
-        Label country = new Label("Country");
-        TextField countryInput = new TextField();
-
-        Button button = new Button("Delete");
+        Label name = new Label("Select student email");
+        ComboBox studentsField = new ComboBox(FXCollections.observableArrayList(courseNames));
+        Label message = new Label();
+        Button deleteButton = new Button("Delete student");
+        deleteButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
+        backButton.setMaxWidth(Double.MAX_VALUE);
+        StudentUI studentUI = new StudentUI();
+        layout.getChildren().addAll(name, studentsField, deleteButton, backButton, message);
+        layout.setSpacing(5);
 
-        // VBox box = new VBox();
+        backButton.setOnAction((event) -> {
+            layout.getChildren().clear();
+            layout.getChildren().add(studentUI.getView());
+        });
 
-        // Scene scene = new Scene(layout,200,200);
-        
-        layout.add(name, 0, 0);
-        layout.add(nameInput, 0, 1);
-        layout.add(email, 0, 2);
-        layout.add(emailInput, 0, 3);
-        layout.add(birthDate, 0, 4);
-        layout.add(birthDateInput, 0, 5);
-        layout.add(gender, 0, 6);
-        layout.add(genderInput, 0, 7);
-        layout.add(address, 0, 8);
-        layout.add(addressInput, 0, 9);
-        layout.add(residence, 0, 10);
-        layout.add(residenceInput, 0, 11);
-        layout.add(country, 0, 12);
-        layout.add(countryInput, 0, 13);
-        layout.add(button, 0, 14);
-        layout.add(backButton, 0, 15);
+        deleteButton.setOnAction((event) -> {
+            String emailStudent = String.valueOf(studentsField.getValue());
+            boolean answer = manager.deleteStudent(emailStudent);
+            if (answer) {
+                message.setText("Deleted student: " + emailStudent);
+            } else {
+                message.setText("Something went wrong try again");
+            }
+        });
 
         return layout;
         

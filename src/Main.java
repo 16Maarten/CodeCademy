@@ -4,11 +4,7 @@ import Application_Logic.RegistrationManager;
 import Application_Logic.StudentManager;
 import DataLayer.DAOFactory;
 import DataLayer.SQLDAOFactory;
-import Presentation.HomeUI;
-import java.util.List;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import products.Course;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.

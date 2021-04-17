@@ -20,14 +20,21 @@ public class StudentManager {
             System.out.println(this.students.get(i).getEmail());
             if (this.students.get(i).getEmail().equals(studentEmail)) {
                 System.out.println(this.students.get(i));
-                return this.daoFactory.removeDAOStudent(this.students.get(i));
+                boolean answer = this.daoFactory.removeDAOStudent(this.students.get(i));
+                students.remove(this.students.get(i));
+                return answer;
             }
         }
         return false;
     }
 
-    public boolean addStudent(String email, String name, Date birthDate, String gender, String address, String residence, String country) {
+    public boolean addStudent(String email, String name, String birthDate, String gender, String address, String residence, String country) {
+        this.students.add(new Student(email, name, birthDate, gender, address, residence, country));
         return this.daoFactory.addDAOStudent(new Student(email, name, birthDate, gender, address, residence, country));
+    }
+
+    public List<Student> getStudents() {
+        return students;
     }
 
 }
