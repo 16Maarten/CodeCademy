@@ -1,5 +1,7 @@
 package Presentation.CourseUI;
 
+import Application_Logic.CourseManager;
+import Application_Logic.DataManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,17 +15,24 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CourseUI{
+public class CourseUI {
 
-    public Parent getView(){
+    private CourseManager courseManager;
+
+    public CourseUI() {
+        DataManager manager = new DataManager();
+        courseManager = manager.getCourseManager();
+    }
+
+    public Parent getView() {
         BorderPane layout = new BorderPane();
         Button create = new Button("Create course");
         create.setMaxWidth(Double.MAX_VALUE);
-        CourseCreateUI createUI = new CourseCreateUI();
+        CourseCreateUI createUI = new CourseCreateUI(courseManager);
 
         Button read = new Button("Info course");
         read.setMaxWidth(Double.MAX_VALUE);
-        CourseReadUI readUI = new CourseReadUI();
+        CourseReadUI readUI = new CourseReadUI(courseManager);
 
         Button update = new Button("Update course");
         update.setMaxWidth(Double.MAX_VALUE);
@@ -34,7 +43,7 @@ public class CourseUI{
         CourseDeleteUI deleteUI = new CourseDeleteUI();
 
         VBox box = new VBox();
-        box.getChildren().addAll( create, read, update, delete);
+        box.getChildren().addAll(create, read, update, delete);
         box.setSpacing(25);
         layout.setCenter(box);
 
@@ -45,7 +54,6 @@ public class CourseUI{
 
         return layout;
 
-        
     }
-    
+
 }

@@ -1,20 +1,24 @@
 package Presentation.CourseUI;
 
 import Application_Logic.CourseManager;
-import Application_Logic.DataManager;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class CourseCreateUI {
 
+    private CourseManager manager;
+
+    public CourseCreateUI(CourseManager manager) {
+        this.manager = manager;
+    }
+
     public Parent getView() {
-        GridPane layout = new GridPane();
+        VBox layout = new VBox();
 
         Label courseName = new Label("Course name");
         TextField courseNameInput = new TextField();
@@ -35,45 +39,30 @@ public class CourseCreateUI {
 
         spinner.setValueFactory(valueFactory);
 
-        Label space = new Label(" ");
-
         Button addButton = new Button("Add");
+        addButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
+        backButton.setMaxWidth(Double.MAX_VALUE);
         CourseUI courseUI = new CourseUI();
-        Label message = new Label(" ");
+        Label message = new Label();
 
-        HBox box = new HBox(addButton, backButton);
-        box.setSpacing(61);
-
-        layout.add(courseName, 0, 0);
-        layout.add(courseNameInput, 0, 1);
-        layout.add(subject, 0, 2);
-        layout.add(subjectInput, 0, 3);
-        layout.add(introText, 0, 4);
-        layout.add(introTextInput, 0, 5);
-        layout.add(difficulty, 0, 6);
-        layout.add(spinner, 0, 7);
-        layout.add(space, 0, 8);
-        layout.add(box, 0, 9);
-        layout.add(message, 0, 10);
-
+        layout.getChildren().addAll(courseName, courseNameInput, subject, subjectInput, introText, introTextInput, difficulty, spinner, addButton, backButton, message);
+        layout.setSpacing(5);
         backButton.setOnAction((event) -> {
             layout.getChildren().clear();
-            layout.add(courseUI.getView(), 0, 0);
+            layout.getChildren().add(courseUI.getView());
         });
 
         addButton.setOnAction((event) -> {
-            DataManager manager = new DataManager();
-            CourseManager courseManager = manager.getCourseManager();
             String nameCourse = courseNameInput.getText();
             String subjectCourse = subjectInput.getText();
             String introTextCourse = introTextInput.getText();
             int difficultyCourse = spinner.getValue();
-            boolean answer = courseManager.addCourse(nameCourse, subjectCourse, introTextCourse, difficultyCourse);
-            if(answer){
-            message.setText("Added course: "+ nameCourse);
+            boolean answer = manager.addCourse(nameCourse, subjectCourse, introTextCourse, difficultyCourse);
+            if (answer) {
+                message.setText("Added course: " + nameCourse);
             } else {
-            message.setText("Something went wrong try again");
+                message.setText("Something went wrong try again");
             }
         });
 
