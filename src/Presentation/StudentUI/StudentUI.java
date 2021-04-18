@@ -36,22 +36,17 @@ public class StudentUI {
         read.setMaxWidth(Double.MAX_VALUE);
         StudentReadUI readUI = new StudentReadUI(studentManager);
 
-        Button update = new Button("Update Student");
-        update.setMaxWidth(Double.MAX_VALUE);
-        StudentUpdateUI updateUI = new StudentUpdateUI();
-
         Button delete = new Button("Delete course");
         delete.setMaxWidth(Double.MAX_VALUE);
         StudentDeleteUI deleteUI = new StudentDeleteUI(studentManager);
 
         VBox box = new VBox();
-        box.getChildren().addAll(create, read, update, delete);
+        box.getChildren().addAll(create, read, delete);
         box.setSpacing(25);
         layout.setCenter(box);
 
         create.setOnAction((event) -> layout.setCenter(createUI.getView()));
         read.setOnAction((event) -> layout.setCenter(readUI.getView()));
-        update.setOnAction((event) -> layout.setCenter(updateUI.getView()));
         delete.setOnAction((event) -> layout.setCenter(deleteUI.getView()));
 
         return layout;

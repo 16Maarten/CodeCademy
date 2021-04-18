@@ -1,6 +1,7 @@
 package Presentation.StudentUI;
 
 import Application_Logic.StudentManager;
+import TestsSrc.DateTools;
 import TestsSrc.MailTools;
 import TestsSrc.PostalCode;
 import javafx.collections.FXCollections;
@@ -80,8 +81,15 @@ public class StudentCreateUI {
             PostalCode postalcode = new PostalCode();
             String postalCodeFormat = postalcode.FormatPostalCode(postalCodeStudent);
             MailTools mailTool = new MailTools(emailStudent);
+            DateTools dateTools = new DateTools();
+            String[] dates = birthdayStudent.split("-");
+            int day = Integer.valueOf(dates[0]);
+            int Month = Integer.valueOf(dates[1]);
+            int Year = Integer.valueOf(dates[2]);
             if (mailTool.validateMailAddress()) {
                 formatMessage.setText("Check the format of your email");
+            } else if (dateTools.validateDate(day, Month, Year)) {
+                formatMessage.setText("Check the format of birthday");
             } else {
 
                 boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent,

@@ -1,6 +1,6 @@
 package TestsSrc;
 public class Url {
-    public static boolean validateURL(String url) {
+    public  boolean validateURL(String url) {
         
         
         if (!url.contains("https:")) {

@@ -1,7 +1,7 @@
 package TestsSrc;
 
 public class DateTools {
-    public static boolean validateDate(int day, int month, int year) {
+    public boolean validateDate(int day, int month, int year) {
         
         //        if(day == 0 || month == 0 || year == 0){
         //            throw new NullPointerException("Day, month or year Cannot Be 0");

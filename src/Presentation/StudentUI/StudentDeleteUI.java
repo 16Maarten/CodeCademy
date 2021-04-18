@@ -17,30 +17,32 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import person.Student;
 
-public class StudentDeleteUI{
+public class StudentDeleteUI {
+
     private StudentManager manager;
     private List<Student> students;
+
     public StudentDeleteUI(StudentManager manager) {
         this.manager = manager;
     }
-    
-    public Parent getView(){
-         VBox layout = new VBox();
+
+    public Parent getView() {
+        VBox layout = new VBox();
         students = manager.getStudents();
-        ArrayList<String> courseNames = new ArrayList();
+        ArrayList<String> studentNames = new ArrayList();
         for (int i = 0; i < students.size(); i++) {
-            courseNames.add(students.get(i).getEmail());
+            studentNames.add(students.get(i).getEmail());
         }
 
-        Label name = new Label("Select student email");
-        ComboBox studentsField = new ComboBox(FXCollections.observableArrayList(courseNames));
+        Label name = new Label("Enter email");
+        TextField emailInput = new TextField();
         Label message = new Label();
         Button deleteButton = new Button("Delete student");
         deleteButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
         backButton.setMaxWidth(Double.MAX_VALUE);
         StudentUI studentUI = new StudentUI();
-        layout.getChildren().addAll(name, studentsField, deleteButton, backButton, message);
+        layout.getChildren().addAll(name, emailInput, deleteButton, backButton, message);
         layout.setSpacing(5);
 
         backButton.setOnAction((event) -> {
@@ -49,17 +51,23 @@ public class StudentDeleteUI{
         });
 
         deleteButton.setOnAction((event) -> {
-            String emailStudent = String.valueOf(studentsField.getValue());
-            boolean answer = manager.deleteStudent(emailStudent);
-            if (answer) {
-                message.setText("Deleted student: " + emailStudent);
-            } else {
-                message.setText("Something went wrong try again");
+            String emailStudent = emailInput.getText();
+            for (int i = 0; i < this.students.size(); i++) {
+                if (!this.students.get(i).getEmail().equals(emailStudent)) {
+                    message.setText("Wrong Email");
+                } else {
+                    boolean answer = manager.deleteStudent(emailStudent);
+                    if (answer) {
+                        message.setText("Deleted student: " + emailStudent);
+                    } else {
+                        message.setText("Something went wrong try again");
+                    }
+                }
             }
         });
 
         return layout;
-        
+
     }
-    
+
 }

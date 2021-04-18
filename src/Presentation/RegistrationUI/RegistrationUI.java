@@ -39,22 +39,18 @@ public class RegistrationUI {
         read.setMaxWidth(Double.MAX_VALUE);
         RegistrationReadUI readUI = new RegistrationReadUI(registrationManager,courseManager,studentManager);
 
-        Button update = new Button("Update Registration");
-        update.setMaxWidth(Double.MAX_VALUE);
-        RegistrationUpdateUI updateUI = new RegistrationUpdateUI();
 
         Button delete = new Button("Delete Registration");
         delete.setMaxWidth(Double.MAX_VALUE);
         RegistrationDeleteUI deleteUI = new RegistrationDeleteUI(registrationManager,courseManager,studentManager);
 
         VBox box = new VBox();
-        box.getChildren().addAll(create, read, update, delete);
+        box.getChildren().addAll(create, read, delete);
         box.setSpacing(25);
         layout.setCenter(box);
 
         create.setOnAction((event) -> layout.setCenter(createUI.getView()));
         read.setOnAction((event) -> layout.setCenter(readUI.getView()));
-        update.setOnAction((event) -> layout.setCenter(updateUI.getView()));
         delete.setOnAction((event) -> layout.setCenter(deleteUI.getView()));
 
         return layout;
