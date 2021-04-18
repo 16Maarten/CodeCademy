@@ -8,8 +8,7 @@
             "type": "java",
             "name": "Launch HomeUI",
             "request": "launch",
-            "vmArgs": "-p C:\\Dev\\javafx-sdk-11.0.2\\lib --add-modules javafx.controls",
-            "mainClass": "Presentation.HomeUI",
+            "mainClass": "HomeUI",
             "projectName": "CodeCademyHerkansing_59274fbe"
         },
         {
@@ -18,7 +17,7 @@
             "request": "launch",
             "vmArgs": "-p C:\\Dev\\javafx-sdk-11.0.2\\lib --add-modules javafx.controls",
             "mainClass": "Presentation.HomeUI",
-            "projectName": "Programmeren_b7a47560"
+            "projectName": "CodeCademyHerkansing_59274fbe"
         }
     ]
 }
