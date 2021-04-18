@@ -17,8 +17,8 @@ public class Course {
         this.subject = subject;
         this.introText = introText;
         this.difficultyIndicator = difficultyIndicator;
-        List<Module> moduleList = new ArrayList();
-        List<Webcast> webcastList = new ArrayList();
+        this.moduleList = new ArrayList();
+        this.webcastList = new ArrayList();
     }
 
     public String getSubject() {

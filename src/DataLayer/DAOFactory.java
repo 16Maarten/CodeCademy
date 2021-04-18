@@ -16,4 +16,7 @@ public interface DAOFactory {
     public boolean addDAORegistration(Registration registration);
     public DAOWebcast createDAOWebcast();
     public DAOModule createDAOModule();
+    public DAOPercentageWatched createDAOPercentageWatched();
+    public boolean updatePercentageWatched(PercentageWatched percentageWatched);
+    public boolean addPercentageWatched(PercentageWatched percentageWatched);
 }

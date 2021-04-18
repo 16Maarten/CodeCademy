@@ -31,6 +31,7 @@ public class CourseWatchUI {
     private String email;
     private String course;
     private String lesson;
+    private int contentId;
 
     public CourseWatchUI(RegistrationManager registrationManager, CourseManager courseManager) {
         this.registrationManager = registrationManager;
@@ -134,7 +135,7 @@ public class CourseWatchUI {
         submitButton3.setOnAction((event) -> {
             this.lesson = String.valueOf(contenItemsField.getValue());
             String[] parts = this.lesson.split(" ");
-            int contentId = Integer.valueOf(parts[0]);
+            this.contentId = Integer.valueOf(parts[0]);
             submitButton2.setText("Choose an other lesson");
             name3.setText("Lesson: " + this.lesson);
             for (int i = 0; i < modules.size(); i++) {

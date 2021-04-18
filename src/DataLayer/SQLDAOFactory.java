@@ -1,5 +1,6 @@
 package DataLayer;
 
+import person.PercentageWatched;
 import person.Registration;
 import person.Student;
 import products.Course;
@@ -65,6 +66,21 @@ public class SQLDAOFactory implements DAOFactory {
     @Override
     public boolean addDAORegistration(Registration registration) {
        return new SQLDAORegistration(this.connectionUrl).addRegistration(registration);
+    }
+
+    @Override
+    public DAOPercentageWatched createDAOPercentageWatched() {
+        return new SQLDAOPercentageWatched(this.connectionUrl);
+    }
+
+    @Override
+    public boolean updatePercentageWatched(PercentageWatched percentageWatched) {
+        return new SQLDAOPercentageWatched(this.connectionUrl).updatePercentageWatched(percentageWatched);
+    }
+
+    @Override
+    public boolean addPercentageWatched(PercentageWatched percentageWatched) {
+        return new SQLDAOPercentageWatched(this.connectionUrl).addPercentageWatched(percentageWatched);
     }
 
 }
