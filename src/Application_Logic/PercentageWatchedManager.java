@@ -24,6 +24,8 @@ public class PercentageWatchedManager {
     }
 
     public boolean addPercentageWatched(int percentage, String email, int contentItemId) {
+        
+
         percentageWatched.add(new PercentageWatched(percentage, email, contentItemId));
         return this.daoFactory.addPercentageWatched(new PercentageWatched(percentage, email, contentItemId));
     }

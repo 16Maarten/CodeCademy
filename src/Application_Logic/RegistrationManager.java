@@ -69,6 +69,8 @@ public class RegistrationManager {
         List<Course> courses = courseManager.getCourses();
         List<Module> modules;
         List<Webcast> webcasts;
+
+
         for (int i = 0; i < courses.size(); i++) {
             if (courses.get(i).getCursusName().equals(cursusName)) {
                 modules = courses.get(i).getModuleList();

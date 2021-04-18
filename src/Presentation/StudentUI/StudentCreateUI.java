@@ -48,6 +48,8 @@ public class StudentCreateUI {
         Label postalCode = new Label("PostalCode");
         TextField postalCodeInput = new TextField();
 
+        Label formatMessage = new Label("");
+
         Button addButton = new Button("Add Student");
         addButton.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
@@ -55,7 +57,9 @@ public class StudentCreateUI {
         StudentUI studentUI = new StudentUI();
         Label message = new Label();
 
-        layout.getChildren().addAll(name, nameInput, email, emailInput, birthDate, datePicker, gender, genderField, address, addressInput, residence, residenceInput, country, countryInput, postalCode, postalCodeInput, addButton, backButton, message);
+        layout.getChildren().addAll(name, nameInput, email, emailInput, birthDate, datePicker, gender, genderField,
+                address, addressInput, residence, residenceInput, country, countryInput, postalCode, postalCodeInput,
+                addButton, backButton, message, formatMessage);
         layout.setSpacing(5);
         backButton.setOnAction((event) -> {
             layout.getChildren().clear();
@@ -71,7 +75,17 @@ public class StudentCreateUI {
             String residenceStudent = residenceInput.getText();
             String countryStudent = countryInput.getText();
             String postalCodeStudent = postalCodeInput.getText();
-            boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent, adressStudent, residenceStudent, countryStudent, postalCodeStudent);
+
+            PostalCode postalcode = new PostalCode(postalCodeStudent);
+            MailTools mailTool = new MailTools(emailStudent);
+            if (postalcode = false) {
+                formatMessage.setText("Check the format of your postal code");
+            } else if (mailTool = false) {
+                formatMessage.setText("Check the format of your email");
+            }
+
+            boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent,
+                    adressStudent, residenceStudent, countryStudent, postalCodeStudent);
             if (answer) {
                 message.setText("Added student: " + nameStudent);
             } else {

@@ -1,6 +1,8 @@
 package Application_Logic;
 
 import DataLayer.DAOFactory;
+import jdk.javadoc.internal.doclets.formats.html.SourceToHTMLConverter;
+
 import java.util.Date;
 import java.util.List;
 import person.Student;
@@ -29,6 +31,8 @@ public class StudentManager {
     }
 
     public boolean addStudent(String email, String name, String birthDate, String gender, String address, String residence, String country, String postalCode) {
+        
+
         this.students.add(new Student(email, name, birthDate, gender, address, residence, country,postalCode));
         return this.daoFactory.addDAOStudent(new Student(email, name, birthDate, gender, address, residence, country,postalCode));
     }
