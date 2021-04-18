@@ -2,6 +2,7 @@ package Presentation.CourseInfoUI;
 
 import Presentation.CourseUI.*;
 import Application_Logic.CourseManager;
+import Application_Logic.PercentageWatchedManager;
 import Application_Logic.RegistrationManager;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -24,6 +28,7 @@ public class CourseWatchUI {
 
     private RegistrationManager registrationManager;
     private CourseManager courseManager;
+    private PercentageWatchedManager percentageWatchedManager;
     private List<Registration> registrations;
     private List<Course> courses;
     private List<Module> modules;
@@ -33,9 +38,10 @@ public class CourseWatchUI {
     private String lesson;
     private int contentId;
 
-    public CourseWatchUI(RegistrationManager registrationManager, CourseManager courseManager) {
+    public CourseWatchUI(RegistrationManager registrationManager, CourseManager courseManager, PercentageWatchedManager percentageWatchedManager) {
         this.registrationManager = registrationManager;
         this.courseManager = courseManager;
+        this.percentageWatchedManager = percentageWatchedManager;
         courses = this.courseManager.getCourses();
     }
 
@@ -51,24 +57,34 @@ public class CourseWatchUI {
             }
         }
 
-        Label name = new Label("Select Email");
+        Label name = new Label("Enter Email");
         Label name2 = new Label("Select Course");
         Label name3 = new Label("Select Lesson");
-
-        ComboBox studentsField = new ComboBox(FXCollections.observableArrayList(studentsEmails));
+        Label message = new Label("Wrong Email");
         ComboBox contenItemsField = new ComboBox(FXCollections.observableArrayList(contentItems));
         ComboBox coursesField = new ComboBox(FXCollections.observableArrayList(coursesNames));
+        TextField emailInput = new TextField();
         coursesField.setMaxWidth(Double.MAX_VALUE);
         contenItemsField.setMaxWidth(Double.MAX_VALUE);
         Button submitButton = new Button("Submit");
         submitButton.setMaxWidth(Double.MAX_VALUE);
+        Label percentage = new Label("Percentage watched 0-100");
+        final Spinner<Integer> spinner = new Spinner<Integer>();
+
+        final int initialValue = 0;
+
+        // Value factory.
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, initialValue);
+
+        spinner.setValueFactory(valueFactory);
+
         Button watchedButton = new Button("Watched");
         watchedButton.setMaxWidth(Double.MAX_VALUE);
+
         Button submitButton2 = new Button("Submit");
         submitButton2.setMaxWidth(Double.MAX_VALUE);
         Button submitButton3 = new Button("Submit");
         submitButton3.setMaxWidth(Double.MAX_VALUE);
-        studentsField.setMaxWidth(Double.MAX_VALUE);
         Button backButton = new Button("Back");
         CourseInfoUI courseInfoUI = new CourseInfoUI();
         backButton.setMaxWidth(Double.MAX_VALUE);
@@ -83,7 +99,7 @@ public class CourseWatchUI {
         Label contentInfo3 = new Label();
         Label contentInfo4 = new Label();
 
-        layout.getChildren().addAll(name, studentsField, submitButton, backButton);
+        layout.getChildren().addAll(name, emailInput, submitButton, backButton);
         layout.setSpacing(5);
 
         backButton.setOnAction((event) -> {
@@ -92,19 +108,24 @@ public class CourseWatchUI {
         });
 
         submitButton.setOnAction((event) -> {
-            this.email = String.valueOf(studentsField.getValue());
+            this.email = emailInput.getText();
             for (int i = 0; i < registrations.size(); i++) {
                 if (registrations.get(i).getEmail().equals(this.email)) {
                     if (!coursesNames.contains(registrations.get(i).getEmail())) {
                         coursesNames.add(registrations.get(i).getCursusName());
                     }
+                    coursesField.setItems(FXCollections.observableArrayList(coursesNames));
+                    name.setText("Email: " + this.email);
+                    layout.getChildren().clear();
+                    layout.getChildren().addAll(name, name2, coursesField, submitButton2, backButton);
                 }
-                coursesField.setItems(FXCollections.observableArrayList(coursesNames));
+
+            }
+            if (!name.getText().equals("Email: " + this.email)) {
+                layout.getChildren().clear();
+                layout.getChildren().addAll(name, emailInput, message, submitButton, backButton);
             }
 
-            name.setText("Email: " + this.email);
-            layout.getChildren().clear();
-            layout.getChildren().addAll(name, name2, coursesField, submitButton2, backButton);
         });
 
         submitButton2.setOnAction((event) -> {
@@ -147,7 +168,7 @@ public class CourseWatchUI {
                     contentInfo2.setText("Contactperson: " + this.modules.get(i).getContactPersonName());
                     contentInfo3.setText("Contactperson email: " + this.modules.get(i).getContactPersonEmail());
                     layout.getChildren().clear();
-                    layout.getChildren().addAll(name, name2, name3, contentTitle, contentInfo1, contentPublicationDate, contentDescription, contentInfo2, contentInfo3, watchedButton, submitButton2, backButton);
+                    layout.getChildren().addAll(name, name2, name3, contentTitle, contentInfo1, contentPublicationDate, contentDescription, contentInfo2, contentInfo3, percentage, spinner, watchedButton, submitButton2, backButton);
                 }
             }
 
@@ -161,24 +182,23 @@ public class CourseWatchUI {
                     contentInfo3.setText("Expert Name: " + this.webcasts.get(i).getExpertName());
                     contentInfo4.setText("Organisation: " + this.webcasts.get(i).getExpertOrganisation());
                     layout.getChildren().clear();
-                    layout.getChildren().addAll(name, name2, name3, contentTitle, contentPublicationDate, contentDescription, contentInfo1, contentInfo2, contentInfo3, contentInfo4, watchedButton, submitButton2, backButton);
+                    layout.getChildren().addAll(name, name2, name3, contentTitle, contentPublicationDate, contentDescription, contentInfo1, contentInfo2, contentInfo3, contentInfo4, percentage, spinner, watchedButton, submitButton2, backButton);
                 }
             }
 
         });
 
-        infoButton.setOnAction((event) -> {
-//            for (int i = 0; i < courses.size(); i++) {
-//                if (courses.get(i).getCursusName().equals(coursesField.getValue())) {
-//                    courseNameOutput.setText("Course: " + courses.get(i).getCursusName());
-//                    subjectOutput.setText("Subject: " + courses.get(i).getSubject());
-//                    introtextOutput.setText("Introtext: " + courses.get(i).getIntroText());
-//                    difficultyIndicatorOutput.setText("Difficulty: " + String.valueOf(courses.get(i).getDifficultyIndicator()));
-//                }
-//            }
+        watchedButton.setOnAction((event) -> {
+            int percentageNew = spinner.getValue();
+            for (int i = 0; i < this.registrations.size(); i++) {
+                if (this.registrations.get(i).getEmail().equals(this.email) && this.registrations.get(i).getCursusName().equals(this.course)) {
+                    percentageWatchedManager.updatePercentageWatched(percentageNew, this.email, this.contentId);
+                    System.out.println(percentageNew + this.email + this.contentId);
+                    Label answer = new Label("Percentage set to: " + String.valueOf(percentageNew));
+                    layout.getChildren().add(answer);
+                }
+            }
 
-            layout.getChildren().clear();
-            //layout.getChildren().addAll(name, coursesField, courseNameOutput, subjectOutput, introtextOutput, difficultyIndicatorOutput, infoButton, backButton);
         });
 
         return layout;

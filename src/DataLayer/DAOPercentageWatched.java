@@ -12,4 +12,5 @@ public interface DAOPercentageWatched {
     public List<PercentageWatched> findPercentageWatched();
     public boolean addPercentageWatched(PercentageWatched percentageWatched);
     public boolean updatePercentageWatched(PercentageWatched percentageWatched);
+    public boolean deletePercentageWatched(PercentageWatched percentageWatched);
 }

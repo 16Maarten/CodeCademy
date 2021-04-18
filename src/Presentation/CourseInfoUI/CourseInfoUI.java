@@ -3,6 +3,7 @@ package Presentation.CourseInfoUI;
 import Presentation.CourseUI.*;
 import Application_Logic.CourseManager;
 import Application_Logic.DataManager;
+import Application_Logic.PercentageWatchedManager;
 import Application_Logic.RegistrationManager;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -21,18 +22,20 @@ public class CourseInfoUI {
 
     private RegistrationManager registrationManager;
     private CourseManager courseManager;
+    private PercentageWatchedManager percentageWatchedManager;
 
     public CourseInfoUI() {
         DataManager manager = new DataManager();
         registrationManager = manager.getRegistrationManager();
         courseManager = manager.getCourseManager();
+        percentageWatchedManager = manager.getPercentageWatchedManager();
     }
 
     public Parent getView() {
         BorderPane layout = new BorderPane();
         Button watchCourse = new Button("Watch course");
         watchCourse.setMaxWidth(Double.MAX_VALUE);
-        CourseWatchUI createWatchUI = new CourseWatchUI(registrationManager,courseManager);
+        CourseWatchUI createWatchUI = new CourseWatchUI(registrationManager,courseManager, percentageWatchedManager);
 
 
         VBox box = new VBox();

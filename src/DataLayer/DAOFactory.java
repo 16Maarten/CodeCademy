@@ -19,4 +19,5 @@ public interface DAOFactory {
     public DAOPercentageWatched createDAOPercentageWatched();
     public boolean updatePercentageWatched(PercentageWatched percentageWatched);
     public boolean addPercentageWatched(PercentageWatched percentageWatched);
+    public boolean removePercentageWatched(PercentageWatched percentageWatched);
 }

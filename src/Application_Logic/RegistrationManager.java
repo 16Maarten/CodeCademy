@@ -26,8 +26,36 @@ public class RegistrationManager {
             System.out.println(this.registrations.get(i).getCursusName());
             if (this.registrations.get(i).getCursusName().equals(courseName) && this.registrations.get(i).getEmail().equals(email) && this.registrations.get(i).getRegistrationDate().equals(registrationDate)) {
                 System.out.println(this.registrations.get(i));
+                PercentageWatchedManager percentageWatchedManager = new PercentageWatchedManager(this.daoFactory);
+                List<Integer> contentIds = new ArrayList();
+                CourseManager courseManager = new CourseManager(this.daoFactory);
+                List<Course> courses = courseManager.getCourses();
+                List<Module> modules;
+                List<Webcast> webcasts;
+                for (int j = 0; j < courses.size(); j++) {
+                    if (courses.get(j).getCursusName().equals(courseName)) {
+                        modules = courses.get(j).getModuleList();
+                        webcasts = courses.get(j).getWebcastList();
+                        for (int k = 0; k < modules.size(); k++) {
+                            contentIds.add(modules.get(k).getId());
+                        }
+
+                        for (int k = 0; k < webcasts.size(); k++) {
+                            contentIds.add(webcasts.get(k).getId());
+                        }
+                    }
+                }
+                List<PercentageWatched> percentageWatched = this.registrations.get(i).getPercentageWatched();
+                for (int j = 0; j < contentIds.size(); j++) {
+                    if (percentageWatched.get(j).getEmail().equals(registrations.get(i).getEmail()) && percentageWatched.get(j).getPercentage() == contentIds.get(j)) {
+                        percentageWatched.remove(percentageWatched.get(j));
+                        this.registrations.get(j).setPercentageWatched(percentageWatched);
+                    }
+                    percentageWatchedManager.deletePercentageWatched(registrations.get(i).getEmail(), contentIds.get(j));
+                }
                 boolean answer = this.daoFactory.removeDAORegistration(this.registrations.get(i));
                 this.registrations.remove(this.registrations.get(i));
+
                 return answer;
             }
         }
@@ -54,7 +82,7 @@ public class RegistrationManager {
                 }
             }
         }
-        
+
         for (int i = 0; i < contentIds.size(); i++) {
             percentageWatchedManager.addPercentageWatched(0, email, contentIds.get(i));
         }

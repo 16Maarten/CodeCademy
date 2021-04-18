@@ -83,4 +83,9 @@ public class SQLDAOFactory implements DAOFactory {
         return new SQLDAOPercentageWatched(this.connectionUrl).addPercentageWatched(percentageWatched);
     }
 
+    @Override
+    public boolean removePercentageWatched(PercentageWatched percentageWatched) {
+       return new SQLDAOPercentageWatched(this.connectionUrl).deletePercentageWatched(percentageWatched);
+    }
+
 }

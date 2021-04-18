@@ -8,6 +8,7 @@ public class DataManager {
     private CourseManager courseManager;
     private StudentManager studentmanager;
     private RegistrationManager registrationManager;
+    private PercentageWatchedManager percentageWatchedManager;
     private DAOFactory factory;
 
     public DataManager() {
@@ -28,6 +29,11 @@ public class DataManager {
     public RegistrationManager getRegistrationManager() {
         registrationManager = new RegistrationManager(factory);
         return registrationManager;
+    }
+
+    public PercentageWatchedManager getPercentageWatchedManager() {
+        percentageWatchedManager = new PercentageWatchedManager(factory);
+        return percentageWatchedManager;
     }
 
 }

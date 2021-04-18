@@ -19,12 +19,24 @@ public class PercentageWatchedManager {
     }
 
     public boolean updatePercentageWatched(int percentage, String email, int contentItemId) {
+
         return this.daoFactory.updatePercentageWatched(new PercentageWatched(percentage, email, contentItemId));
     }
 
     public boolean addPercentageWatched(int percentage, String email, int contentItemId) {
         percentageWatched.add(new PercentageWatched(percentage, email, contentItemId));
         return this.daoFactory.addPercentageWatched(new PercentageWatched(percentage, email, contentItemId));
+    }
+
+    public boolean deletePercentageWatched(String email, int contentItemId) {
+        for (int i = 0; i < this.percentageWatched.size(); i++) {
+            if (this.percentageWatched.get(i).getEmail().equals(email)&& this.percentageWatched.get(i).getContentItemId() == contentItemId ) {
+                boolean answer = this.daoFactory.removePercentageWatched(this.percentageWatched.get(i));
+                this.percentageWatched.remove(this.percentageWatched.get(i));
+                return answer;
+            }
+        }
+        return false;
     }
 
     public List<PercentageWatched> getPercentageWatched() {

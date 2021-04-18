@@ -151,4 +151,42 @@ public class SQLDAOPercentageWatched implements DAOPercentageWatched {
         return answer;
     }
 
+    @Override
+    public boolean deletePercentageWatched(PercentageWatched percentageWatched) {
+        boolean answer;
+        // Connection beheert informatie over de connectie met de database.
+        Connection con = null;
+        // Statement zorgt dat we een SQL query kunnen uitvoeren.
+        Statement stmt = null;
+        // ResultSet is de tabel die we van de database terugkrijgen.
+        // We kunnen door de rows heen stappen en iedere kolom lezen.
+        try {
+            // 'Importeer' de driver die je gedownload hebt.
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            // Maak de verbinding met de database.
+            con = DriverManager.getConnection(connectionUrl);
+
+            stmt = con.createStatement();
+            // Voer de query uit op de database.
+            stmt.execute("Delete FROM PercentageWatched WHERE Email='" + percentageWatched.getEmail() + "' AND ContentItemId='" + percentageWatched.getContentItemId() + "'");
+            answer = true;
+        } // Handle any errors that may have occurred.
+        catch (Exception e) {
+            answer = false;
+            e.printStackTrace();
+        } finally {
+            if (stmt != null)
+                try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+            if (con != null)
+                try {
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return answer;
+    }
+
 }
