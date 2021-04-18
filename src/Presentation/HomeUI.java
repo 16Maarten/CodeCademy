@@ -62,7 +62,7 @@ public class HomeUI extends Application {
         overviews.setOnAction((event) -> layout.setCenter(overviewsUI.getView()));
         followCourse.setOnAction((event) -> layout.setCenter(courseInfoUI.getView()));
 
-        windows.setTitle("Codecademy");
+        windows.setTitle("Maarten de Zwart (2176137) en Pavel Spuijbroek (2168221)");
 
         windows.setScene(scene);
         windows.show();

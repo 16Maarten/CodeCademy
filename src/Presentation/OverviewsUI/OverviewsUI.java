@@ -33,21 +33,20 @@ public class OverviewsUI {
         BorderPane layout = new BorderPane();
 
         Button top3 = new Button("Top 3");
-        Top3UI top3UI = new Top3UI(courseManager,percentageWatchedManager);
+        Top3UI top3UI = new Top3UI(courseManager, percentageWatchedManager);
         top3.setMaxWidth(Double.MAX_VALUE);
 
         Button average = new Button("Average Progress");
-        AverageProgressUI averageUI = new AverageProgressUI(courseManager,percentageWatchedManager);
+        AverageProgressUI averageUI = new AverageProgressUI(courseManager, percentageWatchedManager);
         average.setMaxWidth(Double.MAX_VALUE);
 
         Button course = new Button("Course progress");
-        CourseProgressReadUI courseUI = new CourseProgressReadUI(courseManager,percentageWatchedManager,registrationManager);
+        CourseProgressReadUI courseUI = new CourseProgressReadUI(courseManager, percentageWatchedManager, registrationManager);
         course.setMaxWidth(Double.MAX_VALUE);
 
         Button number = new Button("Number students pass");
-        NumberOfStudentsPassUI numberUI = new NumberOfStudentsPassUI();
+        NumberOfStudentsPassUI numberUI = new NumberOfStudentsPassUI(courseManager, registrationManager, percentageWatchedManager);
         number.setMaxWidth(Double.MAX_VALUE);
-
 
         VBox box = new VBox();
         box.getChildren().addAll(top3, average, course, number);
