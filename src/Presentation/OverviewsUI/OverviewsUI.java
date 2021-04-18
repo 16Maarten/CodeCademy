@@ -2,6 +2,7 @@ package Presentation.OverviewsUI;
 
 import Application_Logic.CourseManager;
 import Application_Logic.DataManager;
+import Application_Logic.PercentageWatchedManager;
 import Application_Logic.RegistrationManager;
 import Application_Logic.StudentManager;
 import javafx.geometry.Insets;
@@ -18,12 +19,14 @@ public class OverviewsUI {
     private RegistrationManager registrationManager;
     private CourseManager courseManager;
     private StudentManager studentManager;
+    private PercentageWatchedManager percentageWatchedManager;
 
     public OverviewsUI() {
         DataManager manager = new DataManager();
         this.registrationManager = manager.getRegistrationManager();
         this.courseManager = manager.getCourseManager();
         this.studentManager = manager.getStudentmanager();
+        this.percentageWatchedManager = manager.getPercentageWatchedManager();
     }
 
     public Parent getView() {
@@ -34,7 +37,7 @@ public class OverviewsUI {
         top3.setMaxWidth(Double.MAX_VALUE);
 
         Button average = new Button("Average Progress");
-        AverageProgressUI averageUI = new AverageProgressUI();
+        AverageProgressUI averageUI = new AverageProgressUI(courseManager,percentageWatchedManager);
         average.setMaxWidth(Double.MAX_VALUE);
 
         Button course = new Button("Course progress");
