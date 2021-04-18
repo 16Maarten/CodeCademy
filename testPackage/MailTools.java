@@ -1,3 +1,5 @@
+import java.util.regex.Pattern;
+
 public class MailTools {
     public static boolean validateMailAddress(String mailAddress){
         if(mailAddress.indexOf("@") == -1){

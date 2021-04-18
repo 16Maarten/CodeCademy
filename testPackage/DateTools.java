@@ -1,4 +1,4 @@
-public class DateToolsTest {
+public class DateTools {
     public static boolean validateDate(int day, int month, int year) {
         
         //        if(day == 0 || month == 0 || year == 0){
