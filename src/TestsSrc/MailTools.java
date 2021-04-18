@@ -1,8 +1,14 @@
+package TestsSrc;
 import java.util.regex.Pattern;
 
 public class MailTools {
-    public static boolean validateMailAddress(String mailAddress){
-        if(mailAddress.indexOf("@") == -1){
+    private String email;
+    public MailTools(String email) {
+        this.email = email;
+    }
+    
+    public boolean validateMailAddress(){
+        if(this.email.indexOf("@") == -1){
             return false;
         }
        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
@@ -11,8 +17,8 @@ public class MailTools {
                             "A-Z]{2,7}$";
                               
         Pattern pat = Pattern.compile(emailRegex);
-        if (mailAddress == null)
+        if (this.email == null)
             return false;
-        return pat.matcher(mailAddress).matches();
+        return pat.matcher(this.email).matches();
     }
 }

@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/CourseInfoUI/CourseInfoUI.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/StudentUI/StudentDeleteUI.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/RegistrationUI/RegistrationDeleteUI.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/RegistrationUI/RegistrationReadUI.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/DataLayer/SQLDAORegistration.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/HomeUI.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/CourseUI/CourseDeleteUI.java</file>
-            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/RegistrationUI/RegistrationUI.java</file>
+            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/OverviewsUI/CourseProgressReadUI.java</file>
+            <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/OverviewsUI/OverviewsUI.java</file>
             <file>file:/D:/Project%20Programmeren/CodeCademyHerkansing/src/Presentation/CourseInfoUI/CourseWatchUI.java</file>
         </group>
     </open-files>

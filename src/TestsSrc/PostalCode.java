@@ -1,5 +1,9 @@
+package TestsSrc;
 public class PostalCode {
-    public static String FormatPostalCode(String postalCode){
+    private String postalCode;
+
+     
+    public String FormatPostalCode(String PostalCode){
         if(postalCode == null){
             throw new NullPointerException("PostalCode Cannot Be null");
         }else if(Integer.valueOf(postalCode.trim().substring(0, 4)) > 999 

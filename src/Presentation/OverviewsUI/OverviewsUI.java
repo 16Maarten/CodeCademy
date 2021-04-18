@@ -41,7 +41,7 @@ public class OverviewsUI {
         average.setMaxWidth(Double.MAX_VALUE);
 
         Button course = new Button("Course progress");
-        CourseProgressReadUI courseUI = new CourseProgressReadUI();
+        CourseProgressReadUI courseUI = new CourseProgressReadUI(courseManager,percentageWatchedManager,registrationManager);
         course.setMaxWidth(Double.MAX_VALUE);
 
         Button number = new Button("Number students pass");

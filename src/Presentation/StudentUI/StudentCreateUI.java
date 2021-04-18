@@ -1,6 +1,8 @@
 package Presentation.StudentUI;
 
 import Application_Logic.StudentManager;
+import TestsSrc.MailTools;
+import TestsSrc.PostalCode;
 import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -75,21 +77,20 @@ public class StudentCreateUI {
             String residenceStudent = residenceInput.getText();
             String countryStudent = countryInput.getText();
             String postalCodeStudent = postalCodeInput.getText();
-
-            PostalCode postalcode = new PostalCode(postalCodeStudent);
+            PostalCode postalcode = new PostalCode();
+            String postalCodeFormat = postalcode.FormatPostalCode(postalCodeStudent);
             MailTools mailTool = new MailTools(emailStudent);
-            if (postalcode = false) {
-                formatMessage.setText("Check the format of your postal code");
-            } else if (mailTool = false) {
+            if (mailTool.validateMailAddress()) {
                 formatMessage.setText("Check the format of your email");
-            }
-
-            boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent,
-                    adressStudent, residenceStudent, countryStudent, postalCodeStudent);
-            if (answer) {
-                message.setText("Added student: " + nameStudent);
             } else {
-                message.setText("Something went wrong try again");
+
+                boolean answer = manager.addStudent(emailStudent, nameStudent, birthdayStudent, genderStudent,
+                        adressStudent, residenceStudent, countryStudent, postalCodeFormat);
+                if (answer) {
+                    message.setText("Added student: " + nameStudent);
+                } else {
+                    message.setText("Something went wrong try again");
+                }
             }
         });
 

@@ -1,3 +1,4 @@
+package TestsSrc;
 public class Percentage {
     public static boolean FormatPercentage(int percentage) {
         if (percentage >= 0 && percentage <= 100) {
