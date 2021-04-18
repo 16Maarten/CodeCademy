@@ -33,7 +33,7 @@ public class OverviewsUI {
         BorderPane layout = new BorderPane();
 
         Button top3 = new Button("Top 3");
-        Top3UI top3UI = new Top3UI();
+        Top3UI top3UI = new Top3UI(courseManager,percentageWatchedManager);
         top3.setMaxWidth(Double.MAX_VALUE);
 
         Button average = new Button("Average Progress");
